@@ -1,6 +1,6 @@
 const height = 5;
 
-for (let i=0; i<=height; i++) {
+for (let i=1; i<=height; i++) {
 
     let hashes="";
     let spaces="";

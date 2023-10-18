@@ -6,42 +6,39 @@ b.	Displaying length of longest and shortest gene
 
 let dna = require("./brca1.json");
 
-const START_GEN = "atg"
-const END_GEN = "taa"
+const START_CODON = "atg";
+const END_CODON = "taa";
 
-let startGenIndex = dna.indexOf(START_GEN)
+let startGenIndex = dna.indexOf(START_CODON);
+let endGenIndex = startGenIndex;
 let genCount = 0;
 let longestGen = 0;
 let shortestGen;
-/*
-Program działa w ten sposób, że najpierw dla pierwszej wartości indexu START_GEN sprawdza wszystkie wartości indexu END_GEN i weryfikuje każdego kolejnego kandydata na gena
-i kiedy index END_GEN zwróci -1, zostaje ustalony nowy index START_END i dalej powtarza wszystkie kroki.
-*/
 
 
-do {
-    let endGenIndex = startGenIndex
+while (startGenIndex != -1) {
+  endGenIndex = dna.indexOf(END_CODON, endGenIndex + 3);
+  if (endGenIndex === -1) {
+    startGenIndex = dna.indexOf(START_CODON, startGenIndex + 3);
+    endGenIndex = startGenIndex;
+    continue;
+  }
+  let genPrototype = dna.slice(startGenIndex, endGenIndex + 3);
+  if (genPrototype.length % 3 === 0) {
+    genCount++;
 
-    while (true) {
-        endGenIndex = dna.indexOf(END_GEN, endGenIndex+3)
-        if (endGenIndex===-1) {
-            break;
-        }
-        let genPrototype = dna.slice(startGenIndex, endGenIndex+3)
-        if (genPrototype.length%3===0) {
-            genCount++;
-            if (genPrototype.length>longestGen) {
-                longestGen=genPrototype.length;
-            } else if (genPrototype.length<shortestGen || !shortestGen) {
-                shortestGen=genPrototype.length;
-            }
-        }
-
+    if (genPrototype.length > longestGen) {
+      longestGen = genPrototype.length;
+    } else if (genPrototype.length < shortestGen || !shortestGen) {
+      shortestGen = genPrototype.length;
     }
-    startGenIndex = dna.indexOf(START_GEN, startGenIndex+3)
 
-} while (startGenIndex!=-1)
+    dna = dna.slice(endGenIndex + 3);
+    startGenIndex = dna.indexOf(START_CODON);
+    endGenIndex = startGenIndex;
+  }
+}
 
-console.log("Number of genes: "+genCount);
-console.log("Longest gene: "+longestGen);
-console.log("Shortest gene: "+shortestGen);
+console.log("Number of genes: " + genCount);
+console.log("Length of longest gene: " + longestGen);
+console.log("Length of shortest gene: " + shortestGen);
