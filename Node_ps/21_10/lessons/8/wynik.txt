@@ -1,0 +1,4 @@
+Dodawanie liczb 10 i 5 daje wynik 15
+Odejmowanie liczb 10 i 5 daje wynik 5
+Mnożenie liczb 10 i 5 daje wynik 50
+Dzielenie liczb 10 i 5 daje wynik 2
