@@ -12,7 +12,7 @@ for (let i = creditCardNumber.length-2; i>=0; i--) {
         luhnSum+=Number(digit)
     }
 }
-const isValid = 10-(luhnSum%10)==creditCardNumber.slice(-1)
+const isValid = 10-(luhnSum%10)==creditCardNumber.slice(-1);
 
 if (!isValid) {
     console.log("INVALID")
@@ -22,7 +22,7 @@ if (!isValid) {
         console.log("Given credit card is American Express")
     } else if (masterStartNumbers.includes(creditCardNumber.slice(0,2)) && creditCardNumber.length===16) {
         console.log("Given credit card is Master Card")
-    } else if (creditCardNumber[0]==visaStartNumber && creditCardNumber.length===13 || creditCardNumber.length===16) {
+    } else if (creditCardNumber[0]==visaStartNumber && (creditCardNumber.length===13 || creditCardNumber.length===16)) {
         console.log("Given credit card is Visa Card")
 
     } else {
