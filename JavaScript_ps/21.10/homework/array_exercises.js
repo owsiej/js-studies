@@ -22,6 +22,7 @@ function reverseArray(arr) {
     const reversedArray=[];
     for (const item of arr) {
         reversedArray.unshift(item);
+    
     }
     return reversedArray;
 }

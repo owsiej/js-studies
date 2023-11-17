@@ -8,15 +8,15 @@ function mergeSort(arr) {
 
   let leftSidedArray = arr.slice(0, middleIndex);
   let rightSidedArray = arr.slice(middleIndex);
-//   console.log(
-//     `Lewa strona: ${leftSidedArray}, Prawa strona: ${rightSidedArray}`
-//   );
+  // console.log(
+  //   `Lewa strona: ${leftSidedArray}, Prawa strona: ${rightSidedArray}`
+  // );
 
   mergeSort(leftSidedArray);
   mergeSort(rightSidedArray);
-//   console.log(
-//     `PO Lewa strona: ${leftSidedArray}, Prawa strona: ${rightSidedArray}`
-//   );
+  // console.log(
+  //   `PO Lewa strona: ${leftSidedArray}, Prawa strona: ${rightSidedArray}`
+  // );
   let leftStep=0;
   let rightStep=0;
   let arrayStep=0;
