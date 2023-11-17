@@ -1,0 +1,39 @@
+Wartości Falsy:
+ - false
+ - undefined
+ - null
+ - NaN
+ - 0
+ - "" - pusty string
+
+ Wartości Truthy:
+ - {}
+ - []
+ - wszystko pozostałe co nie jest Falsy
+
+Operator precedence - mówi o tym, jak wyrażenia z operatorami są łączone
+                     * o kolejności działań decyduje pierwszeństwo operatorów
+                     * tabela pierszeństwa: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_precedence
+
+Tworzenie gotowych tablic:
+    - Array(len).fill(value);
+    - [...Array(len)]
+    - Array.from({length:len})
+
+Tablice są referencjami do wartości, czyli w przykładzie:
+    let a=[1];
+    let b=a;
+    - mamy dwie zmienne, które posiadają wartości wskazujące na ten sam adres w pamięci;
+
+unshift, shift - dodawanie/usuwanie el na początku tablicy;
+push, pop - dodawanie/usuwanie el na końcu tablicy;
+
+Funkcje - można wywoływać funkcję przed jej deklaracją ale nie wtedy, gdy
+          funkcja była zadeklarowana w wyrażeniu i np przypisana do zmiennej
+
+Jeżeli w funkcji użyto return z nawiasami {} oznacza to, że funkcja zwraca obiekt;
+
+Closures (domknięcia) - występują kiedy z jednej funkcji zwracamy drugą funkcję
+                      - dana funcja musi być przypisana do zmiennej aby móc wywoływać kolejną funkcję
+                      - wartości poszczególnych wywołań funkcji są zapisywane w tzn. plecaku
+
