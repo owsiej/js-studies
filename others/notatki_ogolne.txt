@@ -37,3 +37,4 @@ Closures (domknięcia) - występują kiedy z jednej funkcji zwracamy drugą funk
                       - dana funcja musi być przypisana do zmiennej aby móc wywoływać kolejną funkcję
                       - wartości poszczególnych wywołań funkcji są zapisywane w tzn. plecaku
 
+hosting, operator porównania == - rzutowanie, różnica pomiędzy null a undefined

@@ -4,7 +4,7 @@ Rozszerzenie zadania 4. Aplikacja powinna wczytać jedną liczbę z pliku a.txt,
 const file = require("fs");
 const mathOperations = require("./math.js");
 const a =Number(file.readFileSync("./a.txt",));
-const b =Number(file.readFileSync("./b.txt",));;
+const b =Number(file.readFileSync("./b.txt",));
 
 const addition = mathOperations.add(a,b);
 const substraction = mathOperations.sub(a,b);
