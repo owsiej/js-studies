@@ -52,7 +52,7 @@ function spendingPerCompany() {
     };
   }, {});
   return {
-    spendingsPerCompany: companiesSpending,
+    spendingsPerCompany: roundValuesOfObject(companiesSpending),
   };
 }
 
@@ -70,7 +70,7 @@ function spendingByTransactionType() {
     };
   }, {});
   return {
-    spendingsByTransactionType: transactionSpending,
+    spendingsByTransactionType: roundValuesOfObject(transactionSpending),
   };
 }
 
@@ -95,7 +95,7 @@ function spendingByMonth() {
     )
   );
   return {
-    spendingsByMonth: sortedMonthSpending,
+    spendingsByMonth: roundValuesOfObject(sortedMonthSpending),
   };
 }
 
@@ -113,8 +113,33 @@ function spendingPerDayOfWeek() {
       [dayName]: acc[dayName] ? (acc[dayName] += cost) : cost,
     };
   }, {});
-
   return {
-    spendingsByDayOfWeek: daySpending,
+    spendingsByDayOfWeek: roundValuesOfObject(
+      sortObjectByDaysOfWeek(daySpending)
+    ),
   };
+}
+
+function roundValuesOfObject(obj) {
+  Object.keys(obj).forEach((key) => (obj[key] = Number(obj[key].toFixed(2))));
+  return obj;
+}
+
+function sortObjectByDaysOfWeek(obj) {
+  const daysOfWeek = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const orderMap = daysOfWeek.reduce((acc, val, i) => {
+    acc[val] = i;
+    return acc;
+  }, {});
+  return Object.fromEntries(
+    Object.entries(obj).sort((a, b) => orderMap[a[0]] - orderMap[b[0]])
+  );
 }
