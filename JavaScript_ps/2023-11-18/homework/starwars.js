@@ -8,37 +8,6 @@ console.log(
   "Sum of all starships cost from episodes 4 - 6 is: " +
     sumAllStarshipsCostFromEpisodes(4, 6)
 );
-// function sumAllStarshipsCostFromEpisodes(startEp, endEp) {
-//   let sum = 0;
-//   // TODO
-//   const starShipsUrls = Array.from(
-//     new Set(
-//       films
-//         .filter(
-//           (epi) =>
-//             epi.url
-//               .split("/")
-//               .filter((a) => a)
-//               .pop() >= startEp &&
-//             epi.url
-//               .split("/")
-//               .filter((a) => a)
-//               .pop() <= endEp
-//         )
-//         .map((epi) => epi.starships)
-//         .flat()
-//     )
-//   );
-//   starships
-//     .filter((ship) => starShipsUrls.includes(ship.url))
-//     .forEach((ship) => {
-//       Number(ship.cost_in_credits)
-//         ? (sum += Number(ship.cost_in_credits))
-//         : null;
-//     });
-
-//   return sum;
-// }
 
 function sumAllStarshipsCostFromEpisodes(startEp, endEp) {
   const listOfEpis = Array.from(
@@ -115,8 +84,8 @@ function getCrewShipFrom(maxCrew, dateStart, dateEnd) {
   ship = starships.filter(
     (ship) =>
       ship.crew <= maxCrew &&
-      new Date(ship.created.split("T")[0]) >= dateStart &&
-      new Date(ship.created.split("T")[0]) < dateEnd
+      new Date(ship.created) >= dateStart &&
+      new Date(ship.created) < dateEnd
   );
   return ship;
 }
@@ -127,40 +96,6 @@ console.log(
   "People from ep 1 - 5 sorted by origin planet diameter low to high: " +
     getPeopleSortedByOriginPlanetDiameter(1, 5)
 );
-
-// function getPeopleSortedByOriginPlanetDiameter(startEp, endEp) {
-//   peopleFromEpis = Array.from(
-//     new Set(
-//       films
-//         .filter(
-//           (epi) =>
-//             epi.url
-//               .split("/")
-//               .filter((a) => a)
-//               .pop() >= startEp &&
-//             epi.url
-//               .split("/")
-//               .filter((a) => a)
-//               .pop() <= endEp
-//         )
-
-//         .map((epi) => epi.characters)
-//         .flat()
-//     )
-//   )
-//     .map((charUrl) => {
-//       const char = people.find((person) => person.url === charUrl);
-//       return {
-//         name: char.name,
-//         originOfPlanet: planets.find((planet) => planet.url === char.homeworld),
-//       };
-//     })
-//     .filter((char) => !isNaN(char.originOfPlanet.diameter))
-//     .sort((a, b) => a.originOfPlanet.diameter - b.originOfPlanet.diameter)
-//     .map((char) => char.name);
-
-//   return peopleFromEpis;
-// }
 
 function getPeopleSortedByOriginPlanetDiameter(startEp, endEp) {
   const listOfEpis = Array.from(
@@ -185,4 +120,3 @@ function getPeopleSortedByOriginPlanetDiameter(startEp, endEp) {
     .sort((a, b) => a.originOfPlanet.diameter - b.originOfPlanet.diameter)
     .map((char) => char.name);
 }
-
