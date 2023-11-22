@@ -11,6 +11,10 @@ Wartości Falsy:
  - []
  - wszystko pozostałe co nie jest Falsy
 
+zmienne:
+    - const - działa tak jak let, jednak nie możemy jej nadpisać
+    - var - definiowana w scope blokowym ma zasięg globalny, natomiast w nie wychodzi poza scope funkcyjny
+
 Operator precedence - mówi o tym, jak wyrażenia z operatorami są łączone
                      * o kolejności działań decyduje pierwszeństwo operatorów
                      * tabela pierszeństwa: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_precedence
@@ -31,10 +35,24 @@ push, pop - dodawanie/usuwanie el na końcu tablicy;
 Funkcje - można wywoływać funkcję przed jej deklaracją ale nie wtedy, gdy
           funkcja była zadeklarowana w wyrażeniu i np przypisana do zmiennej
 
-Jeżeli w funkcji użyto return z nawiasami {} oznacza to, że funkcja zwraca obiekt;
-
 Closures (domknięcia) - występują kiedy z jednej funkcji zwracamy drugą funkcję
                       - dana funcja musi być przypisana do zmiennej aby móc wywoływać kolejną funkcję
                       - wartości poszczególnych wywołań funkcji są zapisywane w tzn. plecaku
 
-hosting, operator porównania == - rzutowanie, różnica pomiędzy null a undefined
+Scope - dzielenie kodu; wyróżniamy scopy globalne, funkcyjne oraz blokowe;
+        - scope dziecko(znajdujący się wewnątrz) ma dostęp do scopa rodzica(zewnętrzego)
+
+Hoisting - zachowania powodujące przesuwanie wywowań funkcji i zmiennych na górze scopa
+         - pojawia się przy definiowaniu zmiennych typu var
+         - w fazie kreacji, jeżeli mamy zainicjalizowaną zmienną var, program wie, że taka zmienna istnieje 
+         - ale nie wie czym ona jest, ponieważ przypisanie do niej następuje w fazie egzekucji
+         - funkcje  zawsze hoistowane są wyżej jak zmienne
+
+operator porównania == - rzutowanie, różnica pomiędzy null a undefined
+
+Obiekt - zawiera się pomiędzy nawiasami klamrowymi;
+       - wywołując paramentry obietku, za jego nazwą możemy dodać "?", np. Character?.name?, 
+         spowoduje to, że program najpierw sprawdzi czy dany obiekt/atrybut istnieje, jeżeli to nic się nie wydarzy
+         -> nie wyrzuci błędu
+       - dynamiczne klucze, czyli definiowanie parametru obiektu w [key]:value, zastosowanie [] pozwala na odniesienie się do
+         klucza który może być zmienną, dynamicznie się generować
