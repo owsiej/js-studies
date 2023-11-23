@@ -22,6 +22,6 @@ const args = yargs(hideBin(process.argv))
 
 if (isNaN(args.b) || isNaN(args.a)) {
   throw new TypeError("Wrong type of arguments.");
-} else {
-  console.log(`Wynik: ${math[args.operator](args.a, args.b).toFixed(2)}`);
 }
+
+console.log(`Wynik: ${math[args.operator](args.a, args.b).toFixed(2)}`);

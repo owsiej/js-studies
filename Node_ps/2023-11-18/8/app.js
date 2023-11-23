@@ -11,12 +11,12 @@ const args = yargs(hideBin(process.argv))
   .option("name", {
     describe: "First name",
     type: "string",
-    demandOption: true
+    demandOption: true,
   })
   .option("lastName", {
     describe: "Last name",
     type: "string",
-    demandOption: true
+    demandOption: true,
   })
   .help().argv;
 
@@ -26,11 +26,8 @@ const user = {
 };
 
 if (!args.name || !args.lastName) {
-    throw new TypeError("Wrong type of arguments.");
-  } else {
-    const jsonStringObj = JSON.stringify(user);
+  throw new TypeError("Wrong type of arguments.");
+}
 
+const jsonStringObj = JSON.stringify(user);
 file.writeFileSync("user.json", jsonStringObj, { encoding: "utf-8" });
-  }
-  
-

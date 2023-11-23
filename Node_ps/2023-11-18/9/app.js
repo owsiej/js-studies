@@ -21,23 +21,25 @@ if (args.hasOwnProperty("size") && isNaN(args.size)) {
 
 function displayFilesByGivenSizeOrAverageSize(pathToFiles, size) {
   const listOfFiles = fs.readdirSync(pathToFiles);
-  const mappedFileList = listOfFiles.map((file) => {
-    const fileStats = fs.statSync(path.join(pathToFiles, file), {
-      throwIfNoEntry: false,
-    });
-    return {
+  const mappedFileList = listOfFiles
+    .map((file) => ({
       name: file,
-      size: fileStats ? fileStats.size : 0,
-    };
-  });
+      stats: fs.statSync(path.join(pathToFiles, file), {
+        throwIfNoEntry: false,
+      }),
+    }))
+    .filter((f) => !f.stats.isDirectory())
+    .map((file) => ({
+      name: file.name,
+      size: file.stats.size,
+    }));
 
+  console.log(mappedFileList.length);
   const target =
-    size === undefined
-      ? Object.entries(mappedFileList).reduce(
-          (a, b) => a + Number(b[1].size),
-          0
-        ) / mappedFileList.length
-      : size;
+    size ??
+    mappedFileList.reduce((a, b) => a + Number(b.size), 0) /
+      mappedFileList.length;
+
   const result = mappedFileList
     .filter((file) => file.size > target)
     .sort((a, b) => b.size - a.size);
