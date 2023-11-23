@@ -6,18 +6,24 @@ const obj = getFinancialObject();
 for (const item in obj) {
   console.log(item);
   console.table(obj[item]);
+  console.log(Object.values(obj[item]).reduce((a,b)=>a+b, 0).toFixed(2));
 }
-
 function getFinancialObject() {
   const financialObject = {
     // i.	How much money was spent in 2014
-    spendingsByYear: getObjectByCost(filterByYear(targetYear), targetYear),
+    spendingsByYear: getObjectByCost(filterByYear(2014), targetYear),
 
     // ii.	Spending per company
-    spendingsPerCompany: getObjectByCost(null, "detailsOfPayent", "company"),
+    spendingsPerCompany: getObjectByCost(
+      financialData,
+      null,
+      "detailsOfPayent",
+      "company"
+    ),
 
     // iii.	Spending per transaction type
     spendingsByTransactionType: getObjectByCost(
+      financialData,
       null,
       "detailsOfPayent",
       "Type"
@@ -25,12 +31,12 @@ function getFinancialObject() {
 
     // iv.	Spending by month
     spendingsByMonth: sortObjectByMonth(
-      getObjectByCost(null, "detailsOfPayent", "date", "month")
+      getObjectByCost(financialData, null, "detailsOfPayent", "date", "month")
     ),
 
     // v.	Spending per day of the week
     spendingsByDayOfWeek: sortObjectByDaysOfWeek(
-      getObjectByCost(null, "detailsOfPayent", "date", "weekday")
+      getObjectByCost(financialData, null, "detailsOfPayent", "date", "weekday")
     ),
   };
   // TODO (create functions for calculations below)
@@ -40,16 +46,22 @@ function getFinancialObject() {
 
 // TODO (util functions)
 
-function filterByYear(year) {
-  return financialData.filter(
-    (transaction) =>
-      new Date(transaction.detailsOfPayent.date).getFullYear() == year
-  );
+function filterByYear(yearInput) {
+  return financialData.filter((transaction) => {
+    const [day, month, year] = transaction.detailsOfPayent.date.split("-");
+    return new Date(year, month - 1, day).getFullYear() == yearInput;
+  });
 }
 
-function getObjectByCost(staticKey, dynamicKey, nestedKey, byDate = null) {
+function getObjectByCost(
+  data,
+  staticKey,
+  dynamicKey,
+  nestedKey,
+  byDate = null
+) {
   return roundValuesOfObject(
-    financialData.reduce((acc, transaction) => {
+    data.reduce((acc, transaction) => {
       let accKey = staticKey ? staticKey : transaction[dynamicKey];
       if (nestedKey) {
         accKey = accKey[nestedKey];

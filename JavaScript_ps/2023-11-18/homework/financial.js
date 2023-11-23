@@ -24,22 +24,23 @@ function getFinancialObject() {
 }
 
 // TODO (util functions)
-
 // i.	How much money was spent in 2014
-function getSpendingByYear(year) {
-  return financialData
-    .filter(
-      (transaction) =>
-        new Date(transaction.detailsOfPayent.date).getFullYear() == year
-    )
-    .reduce((acc, transaction) => {
-      const cost = Number(transaction.cost);
-      const accKey = `spendingIn${year}`;
-      return {
-        ...acc,
-        [accKey]: acc[accKey] ? (acc[accKey] += cost) : cost,
-      };
-    }, {});
+function getSpendingByYear(yearInput) {
+  return roundValuesOfObject(
+    financialData
+      .filter((transaction) => {
+        const [day, month, year] = transaction.detailsOfPayent.date.split("-");
+        return new Date(year, month - 1, day).getFullYear() == yearInput;
+      })
+      .reduce((acc, transaction) => {
+        const cost = Number(transaction.cost);
+        const accKey = `spendingIn${yearInput}`;
+        return {
+          ...acc,
+          [accKey]: acc[accKey] ? (acc[accKey] += cost) : cost,
+        };
+      }, {})
+  );
 }
 // ii.	Spending per company
 function spendingPerCompany() {
