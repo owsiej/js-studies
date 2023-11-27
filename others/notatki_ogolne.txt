@@ -56,3 +56,13 @@ Obiekt - zawiera się pomiędzy nawiasami klamrowymi;
          -> nie wyrzuci błędu
        - dynamiczne klucze, czyli definiowanie parametru obiektu w [key]:value, zastosowanie [] pozwala na odniesienie się do
          klucza który może być zmienną, dynamicznie się generować
+
+róznica pomiedzy funkcja strzalkowa vs anonimowa vs zwykla deklaracja
+
+require vs import - require używamy głównie do bibliotek
+                  - syntax, import {cos} from ('sciezka'), require('sciezka')
+                  - require mozemy odpalic z kazdnego miejsca w kodzie, import natomiast zawsze odpala sie na początku pliku
+                  - require jest synchroniczny a import async
+                  - import mozna wykorzystac do importu pojedynczych rzeczy a require od razu importuje cale moduly
+
+kod asynchroniczny wykona sie po całym kodzie synchronicznym i jak callstack jest pusty
