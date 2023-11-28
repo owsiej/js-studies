@@ -33,7 +33,7 @@ unshift, shift - dodawanie/usuwanie el na początku tablicy;
 push, pop - dodawanie/usuwanie el na końcu tablicy;
 
 Funkcje - można wywoływać funkcję przed jej deklaracją ale nie wtedy, gdy
-          funkcja była zadeklarowana w wyrażeniu i np przypisana do zmiennej
+          funkcja była zadeklarowana w wyrażeniu i np przypisana do zmiennej -> hoisting
 
 Closures (domknięcia) - występują kiedy z jednej funkcji zwracamy drugą funkcję
                       - dana funcja musi być przypisana do zmiennej aby móc wywoływać kolejną funkcję
@@ -45,10 +45,22 @@ Scope - dzielenie kodu; wyróżniamy scopy globalne, funkcyjne oraz blokowe;
 Hoisting - zachowania powodujące przesuwanie wywowań funkcji i zmiennych na górze scopa
          - pojawia się przy definiowaniu zmiennych typu var
          - w fazie kreacji, jeżeli mamy zainicjalizowaną zmienną var, program wie, że taka zmienna istnieje 
-         - ale nie wie czym ona jest, ponieważ przypisanie do niej następuje w fazie egzekucji
-         - funkcje  zawsze hoistowane są wyżej jak zmienne
+           ale nie wie czym ona jest, ponieważ przypisanie do niej następuje w fazie egzekucji
+         - funkcje zawsze hoistowane są wyżej jak zmienne
 
-operator porównania == - rzutowanie, różnica pomiędzy null a undefined
+operator porównania == - jeżeli porównywane wartości są różnych typów to najpierw przeprowadzane jest rzutowanie na dany typ a
+                         później następuje porównanie wartości;
+
+różnica pomiędzy null a undefined:
+        - null oznacza, że dana wartość nie istnieje
+        - undefined oznacza, że dana wartość nie została jeszcze przypisana, czyli:
+                    * zmienna nie została zainicjalizowana
+                    * do zmiennej przypisano wartość, która nie jest liczbą, stringiem, obiektem albo funkcją
+                    * do zmiennej przypisano wartość, która nie istnieje w tablicy lub obiekcie
+
+empty vs blank:
+      - empty - może reprezentować zainicjalizowaną zmienną, lecz nie przedstawiającej żadnej wartości, np: null,undefined,"",[]
+      - blank - przedstawia dosłownie puste miejsce, np. console.log("")
 
 Obiekt - zawiera się pomiędzy nawiasami klamrowymi;
        - wywołując paramentry obietku, za jego nazwą możemy dodać "?", np. Character?.name?, 
@@ -57,7 +69,29 @@ Obiekt - zawiera się pomiędzy nawiasami klamrowymi;
        - dynamiczne klucze, czyli definiowanie parametru obiektu w [key]:value, zastosowanie [] pozwala na odniesienie się do
          klucza który może być zmienną, dynamicznie się generować
 
-róznica pomiedzy funkcja strzalkowa vs anonimowa vs zwykla deklaracja
+call, apply, bind - metody klasy Function:
+      - call - przyjmuje parametr this, czyli obiekt, w zakresie którego ma się wywołać(null,undefined = obiekt globalny) oraz parametry dla funkcji(...args)
+      - apply - to samo co call lecz przyjmuje liste argumentów [...args]
+      - bind - przyjmuje this oraz ...args użyte do przygotowania nowej funkcji i zwraca nową funkcję na obiekcie this z argumentami ..args
+
+róznica pomiedzy funkcja strzalkowa vs anonimowa vs zwykla deklaracja:
+      - zwykłe funkcje są hoistowane do góry a funkcje anonimowe/strzałkowe zwykle przypisane są do zmiennych i w fazie kompilacji są traktowane
+        jako zwykłe zmienne, czyli zadeklarowane ale bez ciała,
+      - parametr this: 
+              - odnosi się do obiektu 
+              - w zwykłych funkcjach this odnosi się do obiektu, którym funkcja jest wywoływana
+              - w strzałkowych/anonimowych this odnosi się do obiektu nadrzędnego, czyli zmiennej, jeżeli zostałą do niej przypisana albo
+                do globala
+      - strzałkowa/anonimowa nie posiadają możliwości użycia metod call, apply, bind oraz parametru arguments zawierającego liste wszystkich argumentów przekazanych do funkcji
+      - funkcje anonimowe:
+          * nie musi mieć podane nazwy podczas deklaracji, czyli function(){} wystarcza
+          * używana jako IIFE
+      - funkcja strzałkowa:
+          * nie może być używana jako metoda, ponieważ nie posiada swojego this
+
+IIFE (Immediately Invoked Function Expression) - funkcja samowywołująca się, (function(){})()
+
+prototype - właściwość w klasach służąca do dziedziczenia właściwości
 
 require vs import - require używamy głównie do bibliotek
                   - syntax, import {cos} from ('sciezka'), require('sciezka')
@@ -65,4 +99,21 @@ require vs import - require używamy głównie do bibliotek
                   - require jest synchroniczny a import async
                   - import mozna wykorzystac do importu pojedynczych rzeczy a require od razu importuje cale moduly
 
-kod asynchroniczny wykona sie po całym kodzie synchronicznym i jak callstack jest pusty
+kod asynchroniczny:
+        - wykona sie po całym kodzie synchronicznym i jak callstack jest pusty
+        - setTimeOut() - wykona się dopiero po kodzie sync nawet, jeżeli delay skończył się wcześniej
+
+Facade functions - zachowują się jako przejście do przeglądarki/narzędzi z node
+
+Promise - znajduje się w jednym z 3 stanów:
+                          - pending - wyjściowy stan, posiada ukrytą właściwość result: initially undefined
+                          - fulfilled - operacja zakończyła się pomyślnie, posiada właściwości {value: "", onFulfilled: []}, result: "done"
+                                        za pomocą .then umieszczamy funkcje to wykonania w onFulfilled
+                          - rejected - operacja zakończyła się niepomyślnie, posiada właściwości {value: "", onRejected: []}, result: "error"
+                                       za pomocą .catch umieszczamy funkcje to wykonania w onRejected
+        - jak argument przyjmuje executor posiadający dwie funkcje: resolve i reject
+        - Promise można uznac jako rozwiązany(resolved) kiedy jedna z funkcji resolve/rejected zostanie odpalona
+        
+fetch() - facade function, która:
+                          - w przeglądarce odpala request
+                          - w js tworzy nowy obiekt Promise

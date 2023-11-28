@@ -16,7 +16,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var products_1 = require("./products");
 var supermarket_1 = require("./supermarket");
 var supermarket = new supermarket_1.Supermarket();
-products_1.products;
 supermarket.addSupplies(products_1.products);
 supermarket.advertise();
 //# sourceMappingURL=task_5.js.map
