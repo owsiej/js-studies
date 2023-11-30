@@ -1,14 +1,23 @@
 // import React from 'react';
 
 import "./LinkedImage.css";
+import viteLogo from "/vite.svg";
+import reactLogo from "../../assets/react.svg";
+import Image from "../Image/Image";
 
-
-const LinkedImage = (props) => {
+const LinkedImage = () => {
   return (
-    <div className={"LinkedImage"}>
-      <a href={props.linkTo} target="_blank" rel="noreferrer">
-        <img src={props.imageSrc} className="logo" alt="Vite logo" />
-      </a>
+    <div>
+      <Image
+        linkTo="https://vitejs.dev"
+        imageSrc={viteLogo}
+        altText="Vite Logo"
+      />
+      <Image
+        linkTo="https://react.dev"
+        imageSrc={reactLogo}
+        altText="React Logo"
+      />
     </div>
   );
 };

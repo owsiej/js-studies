@@ -3,7 +3,7 @@
 import './Header.css'
 
 const Header = (props) => {
-return (<div className={'Header'}>{props.headerText}</div>)
+return (<h1>{props.headerText}</h1>)
 }
 
 export default Header;
