@@ -1,0 +1,49 @@
+union type - tworzy nowy typ z połączenia innych typów za pomocą "|"
+           - każdy z obiektów, który może być przypisany do nowego typu, spełnia warunek nowego typu
+
+keyword "type" - również używane do tworzenia nowego typu, np. type Point = {x:number, y:number}
+               - od interefejsu różni się tym, że do interfejsu po inicjalizacji mozna dodać nowe właściwości a do type nie
+
+type assertions - przypisanie typu do zmiennej za pomocą keyword "as"
+
+literal types - możliwość przypisania konkretnej wartości string albo number jako typ:
+                    * w przypadku zmiennej - let sth = "Hello" ts opisuje ją jako let sth: string, ponieważ let umożliowia zmianę tej zmiennej
+                    * w przypadku zmiennej - const sth = "Hello" ts opisuje ją jako const sth: "Hello", ponieważ const nieumożliwia zmianę tej zmiennej
+              - przydatne w połączniu z union, kiedy np. możemy określić konkretne parametry, jakie przyjmuje funkcja
+              - przy tworzeniu obiektów, np const obj = {counter: 0}, ts nie zakłada, że wartość już zawsze musi być 0 ale przypisuje do niej typ number
+
+narrowing - zawężanie typów zmiennych za pomocą np. operatorów porównania, operatora typeof czy sprawdzania true/false
+
+typeof type guards - string, number, bigint, boolean, symbol, undefined, object, function
+                   - null rozpratrywane jest jako null, dlatego jeżeli przewidujemy nulla warto jeszcze sprawdzić prawdziwość wyrażenia
+                   - type guard - sprawdzanie wartości zwracanych przez typeof
+
+keyof - przyjmuje obiekt, wyciąga z niego klucz i stworzy string/number union type z tych kluczy
+        - jezeli kluczem jest obiekt, ktory posiada indexowanie, np. tablica to wezmie typ tego co jest w środku
+        - z stringa zrobi string | number, ponieważ numbery zawsze rzutowane są na stringi
+
+operator in - sprawdza czy dany obiekt posiada daną właściwość
+
+instanceof - sprawdza czy dany obiekt jest instancja danej klasy
+
+type predicates - przewidywanie typu zmiennej, np. gdy przyjmujemy union type, możemy założyć, jaki konrektnie przyjdzie typ z składowych union type'a, np:
+                - function isFish(pet:Fish | Bird): pet is Fish - za pomocą operatora is zakładamy, że dostaniemy typ Fish
+
+discriminated union - zjawisko, kiedy wszystkie dane typy posiadają tę samą właściwość
+
+typ never - występuje, kiedy tak zawęzimy typy, że nie jest już dostępny żaden inny typ
+
+typ unknown - reprezentuje każdy typ, bezpiecznieszy od typu "any" ponieważ nie mozna zrobic na nim każdej operacji
+
+generics - określanie typu zmiennych "w locie", np. przy deklaracji funkcji -> function identity<Type>(arg: Type): Type
+           w nawiast <> wstawiamy zmienna Type, która zamiera wszystkie typy, kompilator później potrafi zamienić zmienną Type na odpowiedni typ
+           w zależności od użytej zmiennej
+           - zmienna Type można rozszerzać o intefejsy/właściwości, np <Type extends {length: number}> czyli nasz musi mieć właściwość length na typie Number
+
+utility types - lista gotowych typów rozwiązująca typowe problemy: https://www.typescriptlang.org/docs/handbook/utility-types.html
+
+overloading - przeciążanie funkcji, zawsze powinno zawierać 2 lub więcej przeciążeniowych sygnatur powyżej implementacji funckji;
+            - działa w ten sposób, że w sygnaturze implementacji musimy zawrzeć wszystkie powyższe warianty, czyli zaznaczyć, które argumenty są opcjonalne
+              oraz wypisać wszystkie możliwe typy, które funkcja musi zwrócić
+
+! za nazwą zmiennej - używany aby wykluczyć null i undefinded.

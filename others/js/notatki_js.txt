@@ -94,11 +94,15 @@ IIFE (Immediately Invoked Function Expression) - funkcja samowywołująca się, 
 prototype - właściwość w klasach służąca do dziedziczenia właściwości
 
 require vs import - require używamy głównie do bibliotek
-                  - syntax, import {cos} from ('sciezka'), require('sciezka')
+                  - syntax, import from ('sciezka'), require('sciezka')
                   - require mozemy odpalic z kazdnego miejsca w kodzie, import natomiast zawsze odpala sie na początku pliku
                   - require jest synchroniczny a import async
                   - import mozna wykorzystac do importu pojedynczych rzeczy a require od razu importuje cale moduly
-
+                  - używająć importu z {} importujemy konretny obiekt z danej ścieżki, który ma dopisane keyword export,
+                    raz na plik możemy użyć export default, czyli domyślnego importu, czyli kiedy będziemy importować z danej ścieżki
+                    bez powołania na konkretny obiekt za pomocą {}, zimportujemy ten właśnie obiekt,
+                    podsumowująć, chcąc użyć import {"name"}, pod dana ścieżką musi znajdować się obiekt o nazwie "name"
+                    
 kod asynchroniczny:
         - wykona sie po całym kodzie synchronicznym i jak callstack jest pusty
         - setTimeOut() - wykona się dopiero po kodzie sync nawet, jeżeli delay skończył się wcześniej

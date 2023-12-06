@@ -1,9 +1,9 @@
 interface Product {
-    type: string,
+    type: Types | string,
     name: string,
     qty: number
 }
-enum Types {
+export enum Types {
     FRUIT = "fruit",
     SWEET = "sweet",
     ALCOHOL = "alcohol"

@@ -1,34 +1,35 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.products = void 0;
+var supermarket_1 = require("./supermarket");
 exports.products = [
     {
-        type: 'fruit',
+        type: supermarket_1.Types.FRUIT,
         name: 'Apples',
         qty: 5
     },
     {
-        type: 'fruit',
+        type: supermarket_1.Types.FRUIT,
         name: 'Bananas',
         qty: 2
     },
     {
-        type: 'sweet',
+        type: supermarket_1.Types.SWEET,
         name: 'Candies',
         qty: 1
     },
     {
-        type: 'sweets',
-        name: 'Gingerbead',
+        type: supermarket_1.Types.SWEET,
+        name: 'Gingerbread',
         qty: 10
     },
     {
-        type: 'sweets',
+        type: supermarket_1.Types.ALCOHOL,
         name: 'Tequila',
         qty: 9
     },
     {
-        type: 'sweets',
+        type: supermarket_1.Types.ALCOHOL,
         name: 'Tequila',
         qty: 9
     },

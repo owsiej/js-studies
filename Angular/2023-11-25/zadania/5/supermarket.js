@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Supermarket = void 0;
+exports.Supermarket = exports.Types = void 0;
 var Types;
 (function (Types) {
     Types["FRUIT"] = "fruit";
     Types["SWEET"] = "sweet";
     Types["ALCOHOL"] = "alcohol";
-})(Types || (Types = {}));
+})(Types || (exports.Types = Types = {}));
 var Supermarket = /** @class */ (function () {
     function Supermarket() {
         this._fruits = [];

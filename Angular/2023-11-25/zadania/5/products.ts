@@ -1,31 +1,33 @@
+import { Types } from "./supermarket"
+
 export const products = [
     {
-        type: 'fruit',
+        type: Types.FRUIT,
         name: 'Apples',
         qty: 5
     },
     {
-        type: 'fruit',
+        type: Types.FRUIT,
         name: 'Bananas',
         qty: 2
     },
     {
-        type: 'sweet',
+        type: Types.SWEET,
         name: 'Candies',
         qty: 1
     },
     {
-        type: 'sweets',
-        name: 'Gingerbead',
+        type: Types.SWEET,
+        name: 'Gingerbread',
         qty: 10
     },
     {
-        type: 'sweets',
+        type: Types.ALCOHOL,
         name: 'Tequila',
         qty: 9
     },
     {
-        type: 'sweets',
+        type: Types.ALCOHOL,
         name: 'Tequila',
         qty: 9
     },

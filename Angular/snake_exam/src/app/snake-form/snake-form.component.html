@@ -1,0 +1,66 @@
+{{testPlayer | json}}
+
+<div class="container">
+    <form (ngSubmit)="onSubmit()" #snakeForm="ngForm">
+        <h1>Snake Form</h1>
+        <div class="form-group">
+            <label for="playerName">Player name</label>
+            <input type="text"
+                class="form-control"
+                name="playerName"
+                id="playerName"
+                required
+                minlength="3"
+                maxlength="15"
+                pattern="^[0-9a-zA-z]+"
+                [(ngModel)]="testPlayer.name"
+                #playerName="ngModel">
+            <div [hidden]="playerName.valid || playerName.pristine"
+                class="alert alert-danger">
+                <p *ngIf="playerName.errors?.['required']">Player name is
+                    required.</p>
+                <p *ngIf="playerName.errors?.['minlength']">Player name must
+                    have at least 3 characters.</p>
+                <p *ngIf="playerName.errors?.['pattern']">Player name can't have
+                    special symbols/whitespaces.</p>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="playerEmail">Player e-mail</label>
+            <input type="email"
+                class="form-control"
+                name="playerEmail"
+                id="playerEmail"
+                [(ngModel)]="testPlayer.email"
+                ngModel email
+                required
+                #playerEmail="ngModel">
+            <div [hidden]="playerEmail.valid || playerEmail.pristine"
+                class="alert alert-danger">Wrong e-mail adress.</div>
+        </div>
+        <div class="form-group">
+            <label for="playerDateOfbirth">Date of birth</label>
+            <div>
+                <label for="years">Year</label>
+                <select name="years" id="years"  [(ngModel)]="testPlayer.dayOfBirth.year" (change)="resetDayNumber()" required>
+                    <option *ngFor="let year of generateYears()" [value]="year">{{year}}</option>
+                </select>
+                <label for="months">Month</label>
+                <select name="months" id="months" [(ngModel)]="testPlayer.dayOfBirth.month" (change)="resetDayNumber()" required>
+                    <option *ngFor="let month of generateMonths()"
+                        [value]="month">{{month}}</option>
+                </select>
+                <label for="days">Day</label>
+                <select name="days" id="days" [(ngModel)]="testPlayer.dayOfBirth.day" required>
+                    <option *ngFor="let day of generateDays()" [value]="day">{{day}}</option>
+                </select>
+
+            </div>
+        </div>
+        <button type="submit"
+            class="btn btn-success"
+            [disabled]="!snakeForm.form.valid">Start Game</button>
+    </form>
+
+</div>

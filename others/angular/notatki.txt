@@ -1,0 +1,28 @@
+property binding - zapisywanie właściwości z tagów html w nawiasach [], np. <a [title]=""/>
+                 - oznacza to, że wyrażenie jest dynamiczne a zmienne użyte w cudzysłowach są brane z klasy komponentu
+
+event binding - nasłuchuje i reaguje na zachowania użytkownika, np. ruch myszką, naciśnięcie czegoś na klawiaturze
+              - wykorzystuje nawiasy (), w których zawierami event a w cudzysłowach reakcję, np. <button (click)="onSave()">
+              - eventy: https://developer.mozilla.org/en-US/docs/Web/API/UI_Events
+
+pipes - używane są do formatowania danych w templatach poprzez operator |, np. {{some_variable | pipe_formatter}}
+
+directives - organizują DOM (Document Object Model)
+           - @Component rozszerza @Directive, czyli component jest technicznie dyrektywą
+           - poza komponentami, mamy dwa rodzaje dyrektyw:
+                                    * structural - dodają, usuwają i zastępują elementy z layoutu, np. ngfor, ngIf
+                                    * attribute - zmieniają zachowanie/wygląd istniejącego elementu, 
+                                       np ngModel z wykorzystaniem two-way data
+
+dependency injection (DI) - pozwala wszystkim klasom z dekoratorami,np Components, Directives, Pipes ustawiać wspólne zależności
+                          - oznaczone dekoratorem @Injectable()
+                          - zależności udostępniamy pod właściwością providers
+                          - po dodaniu w komponencie, każda nowa instacja tego komponentu dostanie nową instacje tego serwisu
+                          - jeżeli dodamy w app.config to wszystkie komponenty, dyrektywy itp. będą miały dostęp do tej zależności
+                          - najczęściej dodaje się ją do konstruktora klasy, w której jest potrzebna
+
+service - udostępnia i tworzy te zależności
+        - dostaje zadania od komponentu, np. pobranie danych z bazy danych, walidacja inputu itp.
+
+component lifecycle - uruchamianie metod w pewnym momencie okresu życiowego komponentu
+                    - lista "momentów": https://angular.io/guide/lifecycle-hooks
