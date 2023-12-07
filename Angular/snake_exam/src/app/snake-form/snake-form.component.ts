@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Player } from '../player';
 import { FormsModule } from '@angular/forms';
 import moment from 'moment';
@@ -12,12 +12,10 @@ import moment from 'moment';
   styleUrl: './snake-form.component.scss',
 })
 export class SnakeFormComponent {
-  // @Input() playerName: string | undefined;
-  // @Input() playerEmail: string | undefined;
   testPlayer: Player = {
     name: 'PlayerName',
     email: 'example@e-mail',
-    dayOfBirth: {
+    dateOfBirth: {
       year: 2023,
       month: 'January',
       day: 1,
@@ -27,12 +25,13 @@ export class SnakeFormComponent {
 
   onSubmit() {
     this.submitted = true;
+    console.log(this.testPlayer);
   }
   generateDays(): Array<number> {
     return Array.from(
       {
         length: moment(
-          `${this.testPlayer.dayOfBirth.year}-${this.testPlayer.dayOfBirth.month}`,
+          `${this.testPlayer.dateOfBirth.year}-${this.testPlayer.dateOfBirth.month}`,
           'YYYY-MMMM'
         ).daysInMonth(),
       },
@@ -45,12 +44,12 @@ export class SnakeFormComponent {
   }
   generateYears(): Array<number> {
     const years = [];
-    for (let i = 1920; i <= moment().year(); i++) {
+    for (let i = moment().year(); i >= 1920; i--) {
       years.push(i);
     }
-    return years.sort((a, b) => b - a);
+    return years;
   }
   resetDayNumber() {
-    this.testPlayer.dayOfBirth.day = 1;
+    this.testPlayer.dateOfBirth.day = 1;
   }
 }

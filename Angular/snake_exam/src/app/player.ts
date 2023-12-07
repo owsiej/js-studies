@@ -1,7 +1,7 @@
 export interface Player {
   name: string;
   email: string;
-  dayOfBirth: {
+  dateOfBirth: {
     year: number;
     month: string;
     day: number;
