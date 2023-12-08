@@ -13,8 +13,8 @@ import moment from 'moment';
 })
 export class SnakeFormComponent {
   testPlayer: Player = {
-    name: 'PlayerName',
-    email: 'example@e-mail',
+    name: '',
+    email: '',
     dateOfBirth: {
       year: 2023,
       month: 'January',
@@ -28,18 +28,33 @@ export class SnakeFormComponent {
     console.log(this.testPlayer);
   }
   generateDays(): Array<number> {
+    let numberOfDays: number = 0;
+    if (
+      this.testPlayer.dateOfBirth.year == moment().year() &&
+      this.testPlayer.dateOfBirth.month == moment().format('MMMM')
+    ) {
+      numberOfDays = +moment().format('D');
+    } else {
+      numberOfDays = moment(
+        `${this.testPlayer.dateOfBirth.year}-${this.testPlayer.dateOfBirth.month}`,
+        'YYYY-MMMM'
+      ).daysInMonth();
+    }
+
     return Array.from(
       {
-        length: moment(
-          `${this.testPlayer.dateOfBirth.year}-${this.testPlayer.dateOfBirth.month}`,
-          'YYYY-MMMM'
-        ).daysInMonth(),
+        length: numberOfDays,
       },
       (val, idx) => idx + 1
     );
   }
   generateMonths(): Array<string> {
     moment.locale('en');
+    if (this.testPlayer.dateOfBirth.year == moment().year()) {
+      return moment
+        .months()
+        .slice(0, moment.months().indexOf(moment().format('MMMM')) + 1);
+    }
     return moment.months();
   }
   generateYears(): Array<number> {
