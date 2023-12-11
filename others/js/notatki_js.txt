@@ -121,3 +121,41 @@ Promise - znajduje się w jednym z 3 stanów:
 fetch() - facade function, która:
                           - w przeglądarce odpala request
                           - w js tworzy nowy obiekt Promise
+
+new - tworzy pusty obiekt, przypisuje go do this, odnoszące się do tego obiektu
+    - każdy obiekt posiada ukrytą zmienną __proto__, gdzie przechowują się dziedziczone właściwości
+    - przypisuje do tego obiektu podane właściwości i zwraca go
+
+class - zbitek funkcji i obiektu
+          * funkcja to kontruktor
+          * obiekt to pole prototype, gdzie przechowywane są wszystkie metody danej klasy
+
+extends - łaczny prototypy danych klas
+
+static - dostępne tylko klas samych w sobie, nie dla instacji tych klas
+
+JS LIFECYCLE - 1. thread of execution (wątek egzekucji) - idzie po kodzie od góry do dołu po linijce, odpalając każdą kolejną linijkę
+               1a. event loop - model tworzyny przy starcie node, odpowiedzialny za wykonanie kodu, zbieranie i przetwarzanie eventów i egzekucje kolejek, mechanizm sprwadzający czy callstack jest pusty
+                              - zajmuje sie kolejkami - FIFO(first-in-first-out), posiada kolejki timers, poll and check
+                                  * timers - wykonuje callbacki ustawione przez setTimeOut and setInterval - wykonywane jako pierwsze
+                                  * poll - zajmuje się I/O eventami, wykonuje ich callbacki oprócz callbacków z timeoutami - wykonywane jako drugie
+                                  * check wykonuje callbacki setImmediate() - wykonywane jako trzecie
+                              - w node pozwala na przerzucenie operacji do jadra systemu
+                              - daje priorytet dla call stacku (czyli wykonanie kody synchronicznego)
+               1b. przed odpaleniem modułu, node wrapuje go funkcją przez co:
+                    * zamyka wszystkie zmienne w tymm module zamiast trzymać je globalnie (zmienne w funkcji są widoczne tylko w jej bloku)
+                    * tworzy globalne zmienne spefyciczne dla danego modulu, np. module/exports używane później do eksportu kodu z modułu czy filename/dirname zawierające nazwę pliku oraz ściężke do niego
+               1c. callback - funkcja podana jako argument w innej funkcji, pozwalają na przetwarzanie innego kodu w międzyczasie
+                    * kiedy async func zrobi jakieś zapytanie do node api, w momencie kiedy przyjdzie return z api, callback do kolejki obsługiwanej przez event loop
+                    * kiedy call stack będzie pusty to zostanie odpalony callback
+               2. memory - miejsce zachowywania wszystkich danych
+               3. call stack - mechanizm interpretera pozwalający śledzić aktualnie wywołujące się miejsce w kodzie
+                             - LIFO - last in, first out -> kiedy interpreter trafia w kodzie na wywołanie funkcji to dodaje ją do stacka i przetwarza
+                                                         -> jeżeli ta funkcja posiada kolejne wywołania funkcji to dodawane są one na góre stacka i przetwarzane
+                                                         -> jeżeli dana funkcja zostanie zakończona, zostaje usunięta z stacka i następuje powrót do kodu z miejsca tej funkcji
+               3a. asynchroniczne funkcje wrzuce są w kolejki i oczekują aż synchroniczny kod się zakończy(call stack będzie pusty)
+
+callback vs Promise - callback jest funkcja a Promise obiektem
+                    - callback przymuje argumenty a Promise zwraca wartości
+                    - callback wspiera success/error a Promise nic nie obsługuje ale przekazuje wartości
+                    - callback może być wywołany wiele razy a Promise tylko raz
