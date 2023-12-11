@@ -15,4 +15,4 @@ function randomPromise() {
 randomPromise()
   .then((value) => console.log(value))
   .catch((e) => console.log(e));
-6;
+
