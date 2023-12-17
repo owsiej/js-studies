@@ -1,0 +1,15 @@
+<h1>People in the room</h1>
+
+<p >Max number:{{maxNumber}} </p>
+<p [style.color]="color">Current number:{{currentNumber}} </p>
+
+<div>
+    <label for="buttonUp">Someone entered the room: </label>
+    <br />
+    <button [disabled]="currentNumber===maxNumber" type="button" id="buttonUp" (click)="increaseNumber()">+1</button>
+</div>
+<div>
+    <label for="buttonDown">Someone left the room: </label>
+    <br />
+    <button [disabled]="currentNumber===0" type="button" id="buttonDown" (click)="decreaseNumber()">-1</button>
+</div>

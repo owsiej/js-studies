@@ -1,0 +1,3 @@
+(function forceStackOverflowError() {
+  return forceStackOverflowError();
+})();

@@ -6,6 +6,8 @@ function sudokuSolver(squares, rows, columns) {
   while (solvedSquares !== 9 && emptyIterationCounter !== 9) {
     solvedSquares = 0;
     emptyIterationCounter = 0;
+    // przechodzimy przez wszystkie kwadraty w sudoku, pętla kończy się jak wszystkie kwadraty są rozwiązane
+    // albo w momencie kiedy przejdziemy przez wszystkie kwadraty i nie zrobimy żadnej zmiany -> emptyIteratorCounter
     for (const square of squares) {
       if (square.isSquareSolved()) {
         solvedSquares++;
@@ -17,14 +19,18 @@ function sudokuSolver(squares, rows, columns) {
         (column) => column.position === square.column
       );
 
+      // nierozwiązane komórki uzupełniamy o numery, ktore mozemy wstawic na podstawie mozliwosci z rzedow oraz kolumn
       square.updatePossibleNumbersInUnsolvedCells("byRow", filteredRows);
       square.updatePossibleNumbersInUnsolvedCells("byColumn", filteredColumns);
 
       let solvedRowCount = 0;
       let unsolvedCellsCount = 0;
       let unsolvedCellsCountOnCurrentIteration;
+      //  określamy listę unikalnych opcji w skali całej tablicy sudoku 
       const uniqueSquareNumber = square.findUniqueNumbersInAllUnsolvedCells();
 
+      // przechodzimy przez 3 rzedy każdego kwadratu sudoku, jeżeli rząd jest rozwiązany to pomijamy iterację
+      // jeżeli rząd a jakieś nierozwiązane komórki to sprawdzamy, czy możemy je rozwiązać
       while (
         solvedRowCount !== 3 &&
         unsolvedCellsCount !== unsolvedCellsCountOnCurrentIteration

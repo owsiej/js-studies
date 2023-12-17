@@ -1,0 +1,1 @@
+// błędy - nie podany parametr z znakami w ogole, podany pusty string albo whitespace
