@@ -14,20 +14,20 @@ function sudokuSolver(squares, rows, columns) {
         emptyIterationCounter++;
         continue;
       }
-      const filteredRows = rows.filter((row) => row.position === square.row);
-      const filteredColumns = columns.filter(
+      const rowsInSquare = rows.filter((row) => row.position === square.row);
+      const columnsInSquare = columns.filter(
         (column) => column.position === square.column
       );
 
       // nierozwiązane komórki uzupełniamy o numery, ktore mozemy wstawic na podstawie mozliwosci z rzedow oraz kolumn
-      square.updatePossibleNumbersInUnsolvedCells("byRow", filteredRows);
-      square.updatePossibleNumbersInUnsolvedCells("byColumn", filteredColumns);
+      square.updatePossibleNumbersInUnsolvedCells("byRow", rowsInSquare);
+      square.updatePossibleNumbersInUnsolvedCells("byColumn", columnsInSquare);
 
       let solvedRowCount = 0;
       let unsolvedCellsCount = 0;
       let unsolvedCellsCountOnCurrentIteration;
-      //  określamy listę unikalnych opcji w skali całej tablicy sudoku 
-      const uniqueSquareNumber = square.findUniqueNumbersInAllUnsolvedCells();
+      //  określamy listę unikalnych opcji w skali całego kwadratu
+      const uniqueSquareNumbers = square.findUniqueNumbersInAllUnsolvedCells();
 
       // przechodzimy przez 3 rzedy każdego kwadratu sudoku, jeżeli rząd jest rozwiązany to pomijamy iterację
       // jeżeli rząd a jakieś nierozwiązane komórki to sprawdzamy, czy możemy je rozwiązać
@@ -48,23 +48,23 @@ function sudokuSolver(squares, rows, columns) {
             unsolvedCellsCount += unsolvedCellsInCurrentRow;
           }
           for (let y = 0; y <= 2; y++) {
-            const currentValue = square.getCell(x, y);
-            if (SudokuSquare.isCellUnsolved(currentValue)) {
+            const currentCell = square.getCell(x, y);
+            if (SudokuSquare.isCellUnsolved(currentCell)) {
               const uniqueIntersection = intersection(
-                currentValue,
-                uniqueSquareNumber
+                currentCell,
+                uniqueSquareNumbers
               );
               const cellSquareSharedPossibilities =
                 uniqueIntersection.length > 0
                   ? uniqueIntersection
-                  : intersection(square.possibleNumbers, currentValue);
+                  : intersection(square.possibleNumbers, currentCell);
 
               if (cellSquareSharedPossibilities.length === 1) {
                 square.solveCell(x, y, cellSquareSharedPossibilities[0]);
-                square.updatePossibleNumbersInSquare();
+                square.updatePossibleNumbers();
 
-                filteredRows[x].updatePossibleNumbers(square.getCell(x, y));
-                filteredColumns[y].updatePossibleNumbers(square.getCell(x, y));
+                rowsInSquare[x].updatePossibleNumbers(square.getCell(x, y));
+                columnsInSquare[y].updatePossibleNumbers(square.getCell(x, y));
               } else {
                 unsolvedCellsCountOnCurrentIteration++;
               }

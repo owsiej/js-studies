@@ -62,10 +62,10 @@ function createSudokuSquares(sudoku) {
   );
 }
 
-function getSudokuRowsOrColumns(listOfSquares, direction) {
+function getSudokuRowsOrColumns(listOfSquares, segment) {
   const groupedSquares = Object.entries(
     listOfSquares.reduce((acc, square) => {
-      const key = square[direction];
+      const key = square[segment];
       return {
         ...acc,
         [key]: acc[key] ? [...acc[key], square] : [square],
@@ -73,7 +73,7 @@ function getSudokuRowsOrColumns(listOfSquares, direction) {
     }, {})
   );
   const result = [];
-  const className = direction === "row" ? Row : Column;
+  const className = segment === "row" ? Row : Column;
   for (const group of groupedSquares) {
     const key = group[0];
     for (let i = 0; i <= 2; i++) {

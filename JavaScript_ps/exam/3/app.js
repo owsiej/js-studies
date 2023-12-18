@@ -4,7 +4,7 @@ const {
 } = require("./sudokuDataStructures");
 const { sudokuSolver } = require("./sudokuSolver");
 const sudokuBoards = require("./sudokuSamples");
-const sudokuBoard = sudokuBoards.testSudoku3;
+const sudokuBoard = sudokuBoards.middleSudoku;
 
 if (sudokuBoard.length !== 9) {
   throw new Error("Sudoku has got too many squares.");

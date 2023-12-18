@@ -1,5 +1,4 @@
 const { intersection, remove } = require("./utility-functions.js");
-
 class SudokuSquare {
   #availableNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   constructor(row, column, numbers) {
@@ -8,20 +7,23 @@ class SudokuSquare {
     this.numbers = numbers;
     this.possibleNumbers = this.#getPossibleNumbers();
   }
-  static isCellUnsolved(cell) {
-    return Array.isArray(cell);
-  }
   getRow(idx) {
     return this.numbers[idx];
   }
   getColumn(idx) {
     return this.numbers.map((val) => val[idx]);
   }
+  getCell(x, y) {
+    return this.numbers[x][y];
+  }
+  static isCellUnsolved(cell) {
+    return Array.isArray(cell);
+  }
   isSquareSolved() {
     return !this.numbers.flat().some((val) => typeof val !== "number");
   }
-  amountOfUnsolvedCellsInRow(idx) {
-    return this.getRow(idx).reduce((acc, val) => {
+  amountOfUnsolvedCellsInRow(rowIdx) {
+    return this.getRow(rowIdx).reduce((acc, val) => {
       SudokuSquare.isCellUnsolved(val) ? acc++ : null;
       return acc;
     }, 0);
@@ -30,51 +32,50 @@ class SudokuSquare {
   solveCell(x, y, value) {
     this.numbers[x][y] = value;
   }
-  getCell(x, y) {
-    return this.numbers[x][y];
-  }
 
-  updatePossibleNumbersInSquare() {
+  updatePossibleNumbers() {
     this.possibleNumbers = this.#getPossibleNumbers();
   }
 
-  updatePossibleNumbersInUnsolvedCells(direction, values) {
+  updatePossibleNumbersInUnsolvedCells(direction, listOfSegments) {
+    const updateCells = (index, getSegment, mapSegment) => {
+      if (getSegment(index).some((val) => typeof val !== "number")) {
+        const valuesIntersection = intersection(
+          listOfSegments[index].possibleNumbers,
+          this.possibleNumbers
+        );
+        mapSegment(index, valuesIntersection);
+      }
+    };
+
     if (direction === "byRow") {
       for (let i = 0; i <= 2; i++) {
-        if (this.getRow(i).some((val) => typeof val !== "number")) {
-          const valuesIntersection = intersection(
-            values[i].possibleNumbers,
-            this.possibleNumbers
-          );
-          this.#mapRow(i, valuesIntersection);
-        }
+        updateCells(i, this.getRow.bind(this), this.#updateRow.bind(this));
       }
     } else if (direction === "byColumn") {
       for (let i = 0; i <= 2; i++) {
-        if (this.getColumn(i).some((val) => typeof val !== "number")) {
-          const valuesIntersection = intersection(
-            values[i].possibleNumbers,
-            this.possibleNumbers
-          );
-          this.#mapColumn(i, valuesIntersection);
-        }
+        updateCells(
+          i,
+          this.getColumn.bind(this),
+          this.#updateColumn.bind(this)
+        );
       }
     }
   }
+
   findUniqueNumbersInAllUnsolvedCells() {
-    const numberCounts = {};
-    const lists = this.numbers
-      .flat()
-      .filter((el) => SudokuSquare.isCellUnsolved(el));
-    for (const list of lists) {
-      for (const number of list) {
-        if (!numberCounts.hasOwnProperty(number)) {
-          numberCounts[number] = 1;
-        } else {
-          numberCounts[number]++;
-        }
+    const numberCounts = this.numbers.flat().reduce((acc, cell) => {
+      if (SudokuSquare.isCellUnsolved(cell)) {
+        acc = cell.reduce((acc2, numb) => {
+          const key = numb;
+          return {
+            ...acc2,
+            [key]: acc2[key] ? (acc2[key] += 1) : 1,
+          };
+        }, acc);
       }
-    }
+      return acc;
+    }, {});
     const result = [];
     for (const number in numberCounts) {
       if (numberCounts[number] === 1) {
@@ -83,8 +84,8 @@ class SudokuSquare {
     }
     return result;
   }
-  #mapRow(number, value) {
-    this.numbers[number] = this.numbers[number].map((numb) => {
+  #updateRow(rowIndex, value) {
+    this.numbers[rowIndex] = this.getRow(rowIndex).map((numb) => {
       if (typeof numb === "string") {
         return value;
       } else if (SudokuSquare.isCellUnsolved(numb)) {
@@ -94,10 +95,11 @@ class SudokuSquare {
     });
   }
 
-  #mapColumn(number, value) {
+  #updateColumn(columnIndex, value) {
+    const column = this.getColumn(columnIndex);
     for (let i = 0; i <= 2; i++) {
-      if (SudokuSquare.isCellUnsolved(this.numbers[i][number])) {
-        this.numbers[i][number] = intersection(this.numbers[i][number], value);
+      if (SudokuSquare.isCellUnsolved(column[i])) {
+        this.numbers[i][columnIndex] = intersection(column[i], value);
       }
     }
   }
