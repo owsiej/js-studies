@@ -25,7 +25,9 @@ Lista endpointów API:
 */
 
 const yargs = require("yargs");
-const getRequestData = require("./request-data");
+const getUserData = require("./user");
+const getWeatherData = require("./weather");
+const getReposNames = require("./repos");
 
 const args = yargs(process.argv)
   .option("login", {
@@ -59,37 +61,73 @@ let weatherUrl =
 
 (async () => {
   try {
-    const user = await getRequestData(userUrl);
-    console.log(`User name: ${user.name}`);
+    const userData = await getUserData(userUrl, shouldDisplayFollowers);
+    console.log(`User name: ${userData.name}`);
     if (shouldDisplayFollowers) {
-      console.log(`User followers: ${user.followers}`);
+      console.log(`User followers: ${userData.followers}`);
     }
-    console.log(`Number of user repositories: ${user.public_repos}`);
-    const repoUrl = user.repos_url;
-    if (user.repos_url) {
-      const userRepos = await getRequestData(repoUrl);
+    console.log(`Number of user repositories: ${userData.numberOfRepos}`);
+    if (userData.reposUrl) {
+      const reposNames = await getReposNames(userData.reposUrl);
       console.log("User repos names:");
-      userRepos.forEach((repo) => {
-        console.log(" * ", repo.name);
+      reposNames.forEach((repo) => {
+        console.log(" * ", repo);
       });
+    } else {
+      console.error(
+        "User do not have specified url to repos so I can not display their names."
+      );
     }
-    if (!user.location) {
-      throw new Error(
+    if (userData.location) {
+      weatherUrl = weatherUrl.concat(userData.location);
+      const weatherData = await getWeatherData(weatherUrl);
+
+      console.log(`Weather in ${userData.location}`);
+      Object.entries(weatherData.main).forEach((stat) => {
+        console.log(` * ${stat[0]} - ${stat[1]}`);
+      });
+      console.log(`Weather description: ${weatherData.description}`);
+    } else {
+      console.error(
         "User do not have specified location so I can not check weather."
       );
     }
-    weatherUrl = weatherUrl.concat(user.location);
-    const weather = await getRequestData(weatherUrl);
-    if (weather.main) {
-      console.log(`Weather in ${userLocation}`);
-      Object.entries(weather.main).forEach((stat) => {
-        console.log(` * ${stat[0]} - ${stat[1]}`);
-      });
-    }
-    console.log(`Weather description: ${weather.weather[0].description}`);
   } catch (error) {
     console.log(error);
   }
 })();
-console.log(args);
+
 // $ node app.js --login octocat --followers true
+
+// const user = await getRequestData(userUrl);
+// console.log(`User name: ${user.name}`);
+// if (shouldDisplayFollowers) {
+//   console.log(`User followers: ${user.followers}`);
+// }
+// console.log(`Number of user repositories: ${user.public_repos}`);
+// const repoUrl = user.repos_url;
+// if (user.repos_url) {
+//   const userRepos = await getRequestData(repoUrl);
+//   console.log("User repos names:");
+//   userRepos.forEach((repo) => {
+//     console.log(" * ", repo.name);
+//   });
+// }
+// if (!userData.location) {
+//   throw new Error(
+//     "User do not have specified location so I can not check weather."
+//   );
+// }
+
+// weatherUrl = weatherUrl.concat(user.location);
+// const weather = await getRequestData(weatherUrl);
+// if (weather.main) {
+//   console.log(`Weather in ${userLocation}`);
+//   Object.entries(weather.main).forEach((stat) => {
+//     console.log(` * ${stat[0]} - ${stat[1]}`);
+//   });
+// }
+// console.log(`Weather description: ${weather.weather[0].description}`);
+// } catch (error) {
+// console.log(error);
+// }
