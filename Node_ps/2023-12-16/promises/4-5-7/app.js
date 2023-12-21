@@ -1,5 +1,5 @@
 const request = require("request");
-
+const fs = require("fs");
 const getUser = (id) => {
   const url = `https://jsonplaceholder.typicode.com/users/${id}`;
 
@@ -33,6 +33,18 @@ const getWeather = (lat, lng) => {
     });
   });
 };
+
+const saveFile = (filename, data) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(filename, JSON.stringify(data), (error) => {
+      if (error) {
+        reject(error);
+      }
+      resolve("file saved");
+    });
+  });
+};
+
 getUser(1)
   .then((user) => {
     console.log("nazwa użytkownika: " + user.name);
@@ -41,8 +53,9 @@ getUser(1)
     return getWeather(lat, lng);
   })
   .then((weather) => {
-    console.log(weather.weather[0].description);
+    return saveFile("weather.json", weather);
   })
+
   .catch((error) => {
     console.log(error);
   });

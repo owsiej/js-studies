@@ -1,4 +1,8 @@
 const axios = require("axios");
+const fs = require("fs");
+const util = require("util");
+
+const writeFile = util.promisify(fs.writeFile);
 
 const getUser = (id) => {
   const url = `https://jsonplaceholder.typicode.com/users/${id}`;
@@ -10,6 +14,10 @@ const getWeather = (lat, lng) => {
   return axios.get(url).then((response) => response.data);
 };
 
+const saveFile = (filename, data) => {
+  return writeFile(filename, JSON.stringify(data)).then(() => "file saved");
+};
+
 getUser(1)
   .then((user) => {
     console.log(user.name);
@@ -19,6 +27,7 @@ getUser(1)
   })
   .then((weather) => {
     console.log(weather.weather[0].description);
+    return saveFile("weather.json", weather);
   })
   .catch((error) => {
     console.log(error);
