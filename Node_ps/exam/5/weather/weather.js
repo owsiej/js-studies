@@ -1,12 +1,14 @@
-const getRequestData = require("./request-data");
-
+const getRequestData = require("../request-data");
+const Weather = require("./weatherClass");
 const getWeatherData = async (url) => {
   try {
-    const weatherData = {};
     const weather = await getRequestData(url);
-    weatherData.main = weather.main;
-    weatherData.description = weather.weather[0].description;
-    return weatherData;
+
+    return new Weather(
+      weather.main,
+      weather.weather[0].description,
+      weather.name
+    );
   } catch (error) {
     throw new Error(`Error during getting weather data. ${error}`);
   }

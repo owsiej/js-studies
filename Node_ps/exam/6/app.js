@@ -1,21 +1,3 @@
-/*
-[10 punktów] Napisz aplikację pozwalającą na przechowywanie w pliku listy zadań do wykonania (klasyczna lista TODO). 
-Aplikacja powinna pozwalać na dodanie do listy nowego zadania, jak również wyświetlić zawartość całej listy. 
-Przy uruchomieniu bez parametrów aplikacja powinna informować o możliwych parametrach wywołania.
-
-- zapis/odczyt wykonuj asynchronicznie
-- pamiętaj o obsłudze błędów
-- poinformuj użytkownika o poprawności wykonanych operacji
-- wydziel odczyt i zapis informacji do osobnych modułów
-
-Sugeruje użyć modułu yargs z konstrukcją yargs.command.
-
-Przykład wywołania programu:
-
-> node app.js dodaj "napisac program na zaliczenie z NodeJS"
-> node app.js lista
-
-*/
 const yargs = require("yargs");
 const readFile = require("./read-data");
 const addDataToFile = require("./write-data");
@@ -27,7 +9,6 @@ yargs
     "dodaj",
     'Add new task to TODO list. Remember to put the entire task between "".',
     (argv) => {
-      console.log(argv.argv);
       if (argv.argv._.length === 1) {
         console.error("You did not provide any task to add.");
         process.exit(1);
@@ -58,7 +39,7 @@ yargs
     () => {},
     async () => {
       const toDoList = await readFile(TODO_FILE_PATH);
-      console.log("File read successfully. List of tasks:");
+      console.log("File read successfully.\nList of tasks:");
       toDoList.forEach((task) => {
         console.log(task);
       });
@@ -66,7 +47,7 @@ yargs
   )
   .demandCommand(
     1,
+    1,
     "You are obligated to use precisely one command suggested at Commands."
   )
-  .strictOptions()
   .help().argv;
