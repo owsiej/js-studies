@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Player } from '../player';
 import { FormsModule } from '@angular/forms';
 import moment from 'moment';
+import { SnakeService } from '../snake.service';
+import { interval, takeWhile } from 'rxjs';
 
 @Component({
   selector: 'app-snake-form',
@@ -12,6 +14,7 @@ import moment from 'moment';
   styleUrl: './snake-form.component.scss',
 })
 export class SnakeFormComponent {
+  constructor(private snakeService: SnakeService) {}
   testPlayer: Player = {
     name: '',
     email: '',
@@ -21,11 +24,10 @@ export class SnakeFormComponent {
       day: 1,
     },
   };
-  submitted = false;
 
   onSubmit() {
-    this.submitted = true;
-    console.log(this.testPlayer);
+    this.snakeService.updateCurrentPlayer(this.testPlayer);
+    this.snakeService.changeSubmit(true);
   }
   generateDays(): Array<number> {
     let numberOfDays: number = 0;

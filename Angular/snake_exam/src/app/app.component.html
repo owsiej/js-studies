@@ -1,1 +1,8 @@
-<app-snake-form></app-snake-form>
+
+<div *ngIf="currentSubmitState===false">
+   <app-snake-form></app-snake-form>
+</div>
+
+<div *ngIf="currentSubmitState===true">
+   <app-snake-game></app-snake-game>
+</div>

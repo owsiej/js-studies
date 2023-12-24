@@ -1,0 +1,31 @@
+<ngx-snake #game (foodEaten)="onFoodEaten()" (gameOver)="onDead()"></ngx-snake>
+
+<button (click)="onActionStartPressed()">Start</button>
+<button (click)="onActionStopPressed()">Stop</button>
+<button (click)="onActionStopResetPressed()">Reset</button>
+<button (click)="game.actionUp()">Up</button>
+<button (click)="game.actionLeft()">Left</button>
+<button (click)="game.actionRight()">Right</button>
+<button (click)="game.actionDown()">Down</button>
+
+<div>
+    <h2>PLAYER NAME: {{currentPlayer.name}}</h2>
+
+</div>
+<div>
+    <button type="button" (click)="renderFormPage()">QUIT</button>
+</div>
+
+<div>
+    <h2>GAME STATUS: {{gameStatusEvent}}</h2>
+</div>
+<div>
+    <h2>POINTS: {{pointsCounter}}</h2>
+</div>
+
+<div>
+    {{timer | timerFormatter}}
+
+</div>
+
+<!-- wyłączyć button start jeżeli mamy grę paused or in play -->

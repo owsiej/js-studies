@@ -1,4 +1,3 @@
-
 <div class="container w-25">
     <form (ngSubmit)="onSubmit()" #snakeForm="ngForm">
         <h1 style="width: 130%;">Welcome to the Snake Game !</h1>
@@ -42,7 +41,8 @@
                 class="alert alert-danger">Wrong e-mail adress.</div>
         </div>
         <div class="form-group">
-            <label class="form-label" for="playerDateOfbirth">Date of birth</label>
+            <label class="form-label" for="playerDateOfbirth">Date of
+                birth</label>
             <div>
                 <label class="form-label" for="years">Year</label>
                 <select name="years" id="years"
@@ -61,7 +61,8 @@
                 <label class="form-label" for="days">Day</label>
                 <select name="days" id="days"
                     [(ngModel)]="testPlayer.dateOfBirth.day">
-                    <option *ngFor="let day of generateDays()" [value]="day">{{day}}</option>
+                    <option *ngFor="let day of generateDays()"
+                        [value]="day">{{day}}</option>
                 </select>
 
             </div>
