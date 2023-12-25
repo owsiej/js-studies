@@ -19,8 +19,8 @@ export class SnakeGameComponent implements OnInit {
   private _snake!: NgxSnakeComponent;
   currentPlayer!: Player;
   pointsCounter: number = 0;
-  gameStatusEvent: GameStatus = GameStatus.PENDING;
-
+  currentGameStatus: GameStatus = GameStatus.PENDING;
+  allGameStatus = GameStatus;
   private isTimerRunning: boolean = false;
   startTime: number = 0;
   timer: number = 0;
@@ -36,7 +36,7 @@ export class SnakeGameComponent implements OnInit {
     this.snakeService.changeSubmit(false);
   }
   changeGameStatus(status: GameStatus) {
-    this.gameStatusEvent = status;
+    this.currentGameStatus = status;
   }
   onActionStartPressed() {
     this._snake.actionStart();
@@ -53,6 +53,7 @@ export class SnakeGameComponent implements OnInit {
     this._snake.actionReset();
     this.changeGameStatus(GameStatus.PENDING);
     this.resetTimer();
+    this.pointsCounter = 0;
   }
 
   onDead() {
@@ -73,7 +74,6 @@ export class SnakeGameComponent implements OnInit {
         if (this.isTimerRunning) {
           this.timer = Date.now() - this.startTime;
         }
-        console.log('timer');
       });
   }
 
@@ -87,3 +87,15 @@ export class SnakeGameComponent implements OnInit {
     this.timer = 0;
   }
 }
+
+// zrobic nowy komponent do zbierania eventów
+// rodzaje eventow:
+//  - start game
+//  - pause game
+//  - resume game
+//  - reset game
+//  - dead
+//  - eat food
+
+// kazdy event powinien zabierac rodzaj eventu, timestamp, current score
+// mozna dodac opcje sprawdzenia ile dany zawodnik sprzedzil czasu w grze, jego wszystkie wyniki

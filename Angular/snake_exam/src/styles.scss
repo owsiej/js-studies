@@ -3,16 +3,6 @@
 
 $customfont: "mina";
 
-
-.ng-valid[required],
-.ng-valid.required {
-  border-left: 5px solid #42a948; /* green */
-}
-
-.ng-invalid:not(form) {
-  border-left: 5px solid #a94442; /* red */
-}
-
 body {
   background-image: url("../src/assets/snake5.jpg");
   background-repeat: no-repeat;
@@ -21,22 +11,4 @@ body {
   height: 100vh;
   font-family: $customfont;
   font-size: larger;
-
-}
-
-.container {
-    position: relative;
-    left: 250px;
-    top: 150px;
-}
-
-.form-label {
-    padding-bottom: 1px;
-    padding-right: 5px;
-    padding-left: 10px;
-    padding-top: 4px;
-}
-
-h1 {
- text-shadow: #42a948 10px 7px 5px;
 }

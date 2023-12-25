@@ -1,31 +1,68 @@
-<ngx-snake #game (foodEaten)="onFoodEaten()" (gameOver)="onDead()"></ngx-snake>
+<header>
+    <h1 class="fs-2">PLAYER NAME: {{currentPlayer.name}}</h1></header>
 
-<button (click)="onActionStartPressed()">Start</button>
-<button (click)="onActionStopPressed()">Stop</button>
-<button (click)="onActionStopResetPressed()">Reset</button>
-<button (click)="game.actionUp()">Up</button>
-<button (click)="game.actionLeft()">Left</button>
-<button (click)="game.actionRight()">Right</button>
-<button (click)="game.actionDown()">Down</button>
+<div class="container">
 
-<div>
-    <h2>PLAYER NAME: {{currentPlayer.name}}</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="game">
+                <h2>POINTS: {{pointsCounter}}</h2>
+
+                <ngx-snake #game (foodEaten)="onFoodEaten()"
+                    (gameOver)="onDead()"></ngx-snake>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="menu">
+                <p>TIMER: {{timer | timerFormatter}}</p>
+
+                <h2>GAME STATUS: {{currentGameStatus}}</h2>
+                <div class="text-center me-5" [ngSwitch]="currentGameStatus">
+                    <div *ngSwitchCase="allGameStatus.PENDING">
+                        <button class="status-button"
+                            (click)="onActionStartPressed()">Start Game</button>
+                    </div>
+                    <div *ngSwitchCase="allGameStatus.PLAYING">
+                        <button class="status-button me-4"
+                            (click)="onActionStopPressed()">Pause</button>
+                        <button class="status-button ms-4"
+                            (click)="onActionStopResetPressed()">Reset</button>
+                    </div>
+                    <div *ngSwitchCase="allGameStatus.PAUSED">
+                        <button class="status-button"
+                            (click)="onActionStartPressed()">Resume</button>
+                        <button class="status-button ms-4"
+                            (click)="onActionStopResetPressed()">Reset</button>
+                    </div>
+                </div>
+
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col text-center">
+                            <button class="play-button button-up me-5"
+                                (click)="game.actionUp()"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-start"><button
+                                class="play-button button-left"
+                                (click)="game.actionLeft()"></button></div>
+                        <div class="col text-end"><button
+                                class="play-button me-5"
+                                (click)="game.actionRight()"></button></div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center">
+                            <button
+                                class="play-button button-down me-5 text-rotate-90"
+                                (click)="game.actionDown()"></button></div>
+                    </div>
+                </div>
+            </div>
+            <button class="status-button"
+                type="button"
+                (click)="renderFormPage()">QUIT</button>
+        </div>
+    </div>
 
 </div>
-<div>
-    <button type="button" (click)="renderFormPage()">QUIT</button>
-</div>
-
-<div>
-    <h2>GAME STATUS: {{gameStatusEvent}}</h2>
-</div>
-<div>
-    <h2>POINTS: {{pointsCounter}}</h2>
-</div>
-
-<div>
-    {{timer | timerFormatter}}
-
-</div>
-
-<!-- wyłączyć button start jeżeli mamy grę paused or in play -->
