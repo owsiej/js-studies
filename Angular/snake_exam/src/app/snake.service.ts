@@ -31,6 +31,18 @@ export class SnakeService {
   updateCurrentPlayer(player: Player) {
     this.playerSource.next(player);
   }
+
+  setPlayerDataOnDefault() {
+    this.playerSource.next({
+      name: '',
+      email: '',
+      dateOfBirth: {
+        year: 2023,
+        month: 'January',
+        day: 1,
+      },
+    });
+  }
 }
 // Subject vs BehaviorSubject - Subject nie posiada wartosci wyjsciowej
 //                              wiec zapisuje wartosci dopiero po uzyciu subscribe

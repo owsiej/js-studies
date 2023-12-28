@@ -1,38 +1,48 @@
 <header>
-    <h1 class="fs-2">PLAYER NAME: {{currentPlayer.name}}</h1></header>
+    <h1 class="fs-1 my-text">HELLO {{currentPlayer.name}} !</h1></header>
 
-<div class="container">
+<div class="container-xxl">
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-4">
+            <app-snake-events></app-snake-events>
+        </div>
+        <div class="col-4">
             <div class="game">
-                <h2>POINTS: {{pointsCounter}}</h2>
+                <h2 class="text-center my-text fs-2">POINTS:
+                    {{pointsCounter}}</h2>
 
-                <ngx-snake #game (foodEaten)="onFoodEaten()"
+                <ngx-snake (foodEaten)="onFoodEaten()"
                     (gameOver)="onDead()"></ngx-snake>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-4">
             <div class="menu">
-                <p>TIMER: {{timer | timerFormatter}}</p>
+                <p class="my-text fs-5">TIMER: {{timer | timerFormatter}}</p>
 
-                <h2>GAME STATUS: {{currentGameStatus}}</h2>
-                <div class="text-center me-5" [ngSwitch]="currentGameStatus">
-                    <div *ngSwitchCase="allGameStatus.PENDING">
-                        <button class="status-button"
+                <h3 class="my-text fs-3">GAME STATUS: {{currentGameStatus}}</h3>
+                <div class="text-center me-5"
+                    [ngSwitch]="currentGameStatus">
+                    <div *ngSwitchCase="allGameAction.PENDING">
+                        <button class="status-button my-text"
                             (click)="onActionStartPressed()">Start Game</button>
                     </div>
-                    <div *ngSwitchCase="allGameStatus.PLAYING">
+                    <div *ngSwitchCase="allGameAction.PLAY">
                         <button class="status-button me-4"
                             (click)="onActionStopPressed()">Pause</button>
                         <button class="status-button ms-4"
                             (click)="onActionStopResetPressed()">Reset</button>
                     </div>
-                    <div *ngSwitchCase="allGameStatus.PAUSED">
-                        <button class="status-button"
+                    <div *ngSwitchCase="allGameAction.PAUSE">
+                        <button class="status-button me-3"
                             (click)="onActionStartPressed()">Resume</button>
-                        <button class="status-button ms-4"
+                        <button class="status-button ms-3"
                             (click)="onActionStopResetPressed()">Reset</button>
+                    </div>
+                    <div *ngSwitchCase="allGameAction.DEAD">
+                        <button class="status-button me-1"
+                            (click)="onActionStopResetPressed()">Try
+                            again</button>
                     </div>
                 </div>
 
@@ -40,29 +50,37 @@
                     <div class="row">
                         <div class="col text-center">
                             <button class="play-button button-up me-5"
-                                (click)="game.actionUp()"></button>
+                                (click)="onActionUpPressed()"></button>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col text-start"><button
+                        <div class="col text-start ps-5"><button
                                 class="play-button button-left"
-                                (click)="game.actionLeft()"></button></div>
-                        <div class="col text-end"><button
+                                (click)="onActionLeftPressed()"></button></div>
+                        <div class="col text-end pe-5"><button
                                 class="play-button me-5"
-                                (click)="game.actionRight()"></button></div>
+                                (click)="onActionRightPressed()"></button></div>
                     </div>
                     <div class="row">
                         <div class="col text-center">
                             <button
-                                class="play-button button-down me-5 text-rotate-90"
-                                (click)="game.actionDown()"></button></div>
+                                class="play-button button-down me-5"
+                                (click)="onActionDownPressed()"></button></div>
                     </div>
                 </div>
             </div>
-            <button class="status-button"
+            <button class="status-button my-text"
                 type="button"
                 (click)="renderFormPage()">QUIT</button>
         </div>
     </div>
 
+</div>
+<div class="overlay" *ngIf="isAlertVisible">
+    <div class="custom-modal text-center pt-2">
+        <p class="my-text">GAME OVER:</p>
+        <p class="my-text">Your score: {{pointsCounter}}</p>
+        <button class="status-button text-center fs-4 my-text"
+            (click)="hideAlert()">CONTINUE</button>
+    </div>
 </div>

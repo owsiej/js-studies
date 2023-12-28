@@ -13,17 +13,15 @@ import { interval, takeWhile } from 'rxjs';
   templateUrl: './snake-form.component.html',
   styleUrl: './snake-form.component.scss',
 })
-export class SnakeFormComponent {
+export class SnakeFormComponent implements OnInit {
   constructor(private snakeService: SnakeService) {}
-  testPlayer: Player = {
-    name: '',
-    email: '',
-    dateOfBirth: {
-      year: 2023,
-      month: 'January',
-      day: 1,
-    },
-  };
+  testPlayer!: Player;
+
+  ngOnInit(): void {
+    this.snakeService.currentPlayer.subscribe(
+      (player) => (this.testPlayer = player)
+    );
+  }
 
   onSubmit() {
     this.snakeService.updateCurrentPlayer(this.testPlayer);
