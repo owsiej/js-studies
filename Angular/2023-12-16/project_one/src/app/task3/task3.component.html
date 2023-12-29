@@ -1,13 +1,16 @@
 <h1>People in the room</h1>
 
 <p>Max number:{{maxNumber}} </p>
-<p>Current number:{{currentNumber}} </p>
+<p>Current number:{{users.length}} </p>
 
-<input type="text" [(ngModel)]="currentUser">
-<button type="button" (click)="addUser()">Add</button>
+<input type="text" minlength="1" [(ngModel)]="currentUser">
+<button [disabled]="currentUser.length===0 || users.length===maxNumber"
+    type="button"
+    (click)="addUser()">Add</button>
 <br>
 <button type="button" (click)="removeAllUsers()">Clear</button>
 <h2>Currently in there room are:</h2>
 <ul>
-    <li *ngFor="let user of users">{{user}} <button type="button" (click)="removeUser(user)">X</button></li>
+    <li *ngFor="let user of users; let i =index">{{i+1}}. {{user}} <button
+            type="button" (click)="removeUser(i)">X</button></li>
 </ul>

@@ -1,0 +1,34 @@
+<h1>People in the room</h1>
+<h3>(and their preference)</h3>
+
+<p>Max number:{{maxNumber}} </p>
+<p>Current number:{{users.length}} </p>
+
+<input type="text" minlength="1" [(ngModel)]="currentPerson.name">
+<select name="framework" [(ngModel)]="currentPerson.framework">
+    <option *ngFor="let framework of allFrameworks"
+        [value]="framework">{{framework}}</option>
+</select>
+<button
+    [disabled]="currentPerson.name.length===0 || users.length===maxNumber"
+    type="button"
+    (click)="addUser()">Add</button>
+<br>
+<button type="button" (click)="removeAllUsers()">Clear</button>
+<h2>Currently in there room are:</h2>
+<ul>
+    <li *ngFor="let user of users; let i =index">{{i+1}}. {{user.name}} - likes
+        {{user.framework}} <button
+            type="button" (click)="removeUser(i)">X</button>
+        <button type="button" (click)="updateUserToEdit(user)">EDIT</button>
+        <div
+            *ngIf="user === currentEditUser">
+            New name: <input type="text" [(ngModel)]="user.name"> <br>
+            Change framework: <select [(ngModel)]="user.framework">
+                <option *ngFor="let framework of allFrameworks"
+                    [value]="framework">{{framework}}</option>
+            </select><br>
+            <button type="button" (click)="resetUserToEdit()">Confirm
+                change</button>
+        </div></li>
+</ul>
