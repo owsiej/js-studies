@@ -50,8 +50,8 @@ const testCards = [
 ];
 
 const deckOfCards = createDeckOfCards();
-const drawnCards = shuffleDeckAndDraw5Cards(deckOfCards);
-// const drawnCards = testCards;
+// const drawnCards = shuffleDeckAndDraw5Cards(deckOfCards);
+const drawnCards = testCards;
 console.log("Your cards: ");
 drawnCards.forEach((card) => console.log(`${card.face}, ${card.suit}`));
 
