@@ -1,0 +1,10 @@
+<h1>People in the room</h1>
+
+<p>MAX number: {{ maxNumber }}</p>
+<p [style.color]="color">
+  Current number: {{ peopleInTheRoom.length }}
+</p>
+
+<app-form (newUser)="addPerson($event)"></app-form>
+<br>
+<app-list [people]="peopleInTheRoom" (deletePerson)="removePerson($event)" (deleteAll)="clear()"></app-list>

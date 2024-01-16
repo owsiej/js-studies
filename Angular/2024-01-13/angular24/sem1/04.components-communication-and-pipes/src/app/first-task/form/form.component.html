@@ -1,0 +1,6 @@
+<input [(ngModel)]="name" type="text" placeholder="Name" [disabled]="isDisabled" />
+<br />
+<input [(ngModel)]="familyName" placeholder="Family name" [disabled]="isDisabled" />
+<br>
+<button *ngIf="isDisabled" type="button" (click)="onEdit()">Edit</button>
+<button *ngIf="!isDisabled" type="submit" (click)="onFormChange()">Submit</button>

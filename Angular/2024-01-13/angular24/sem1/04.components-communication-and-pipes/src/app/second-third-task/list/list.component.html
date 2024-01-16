@@ -1,0 +1,10 @@
+<button (click)="onDeleteAll()">clear</button>
+
+<ol>
+    @for (person of people; track person) {
+    <li>
+        {{ person.name }} likes {{ person.framework }}
+        <button (click)="onRemove(person)">X</button>
+    </li>
+    }
+</ol>
