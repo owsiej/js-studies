@@ -20,7 +20,8 @@ export class SecondThirdTaskComponent {
   public color = '';
 
   public peopleInTheRoom: Array<Person> = [];
-
+  public personDataToEdit: Person | null = null;
+  public personIndexToEdit: number = 0;
   addPerson(user: Person) {
     if (this.maxNumber === this.peopleInTheRoom.length) {
       alert('The room is full!');
@@ -54,5 +55,13 @@ export class SecondThirdTaskComponent {
     } else {
       this.color = '';
     }
+  }
+  public editPerson(index: number) {
+    this.personDataToEdit = this.peopleInTheRoom[index];
+    this.personIndexToEdit = index;
+  }
+
+  public updatePerson(newData: Person) {
+    this.peopleInTheRoom[this.personIndexToEdit] = newData;
   }
 }

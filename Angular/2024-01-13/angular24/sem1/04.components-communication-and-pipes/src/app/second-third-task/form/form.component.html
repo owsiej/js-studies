@@ -1,7 +1,13 @@
-<input [(ngModel)]="name" placeholder="Name" />
-<select [(ngModel)]="selectedFramework">
-    <option>Angular</option>
-    <option>React</option>
-    <option>Vue</option>
-</select>
-<button [disabled]="!name || !selectedFramework" (click)="onAddNewUser()">Add</button>
+<div>
+    <p *ngIf="editUser">Enter new data for user below: </p>
+    <input [(ngModel)]="name" placeholder="Name" />
+    <select [(ngModel)]="selectedFramework">
+        <option>Angular</option>
+        <option>React</option>
+        <option>Vue</option>
+    </select>
+    <button [disabled]="!name || !selectedFramework" [hidden]="editUser"
+        (click)="onAddNewUser()">Add</button>
+    <button [disabled]="!name || !selectedFramework" [hidden]="!editUser"
+        (click)="onUpdateUser()">Confirm change</button>
+</div>

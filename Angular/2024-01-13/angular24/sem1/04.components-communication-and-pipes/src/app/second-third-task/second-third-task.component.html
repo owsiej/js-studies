@@ -5,6 +5,8 @@
   Current number: {{ peopleInTheRoom.length }}
 </p>
 
-<app-form (newUser)="addPerson($event)"></app-form>
+<app-form (newUser)="addPerson($event)" (updatedUser)="updatePerson($event)"
+  [editUser]="personDataToEdit"></app-form>
 <br>
-<app-list [people]="peopleInTheRoom" (deletePerson)="removePerson($event)" (deleteAll)="clear()"></app-list>
+<app-list [people]="peopleInTheRoom" (deletePerson)="removePerson($event)"
+  (deleteAll)="clear()" (indexPersonToEdit)="editPerson($event)"></app-list>

@@ -1,10 +1,19 @@
 <button (click)="onDeleteAll()">clear</button>
+<p>Filter by favorite framework: </p>
+<select [(ngModel)]="filterBy">
+    <option value="all">Show all</option>
+    <option value="Angular">Angular</option>
+    <option value="React">React</option>
+    <option value="Vue">Vue</option>
+</select>
 
 <ol>
-    @for (person of people; track person) {
+    @for (person of people | filterByFramework:filterBy; track person; let i =
+    $index) {
     <li>
         {{ person.name }} likes {{ person.framework }}
         <button (click)="onRemove(person)">X</button>
+        <button (click)="onEdit(i)">Edit</button>
     </li>
     }
 </ol>
