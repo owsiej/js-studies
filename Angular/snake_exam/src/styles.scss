@@ -19,3 +19,13 @@ body {
   color: black;
   padding: 0px 0px 0px 0px;
 }
+.status-button {
+  border-style: outset;
+  border-width: 10px;
+  border-color: rgb(122, 85, 85);
+  background: transparent;
+  font-size: 25px;
+  font-weight: 900;
+  text-transform: uppercase;
+  box-shadow: 0px 0px 5px 5px rgb(53, 222, 84);
+}

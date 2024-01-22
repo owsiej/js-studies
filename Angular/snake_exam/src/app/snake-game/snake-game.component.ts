@@ -4,10 +4,10 @@ import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
 import { SnakeService } from '../snake.service';
 import { Player } from '../player';
 import { interval, takeWhile } from 'rxjs';
-import { TimerFormatterPipe } from '../timer-formatter.pipe';
 import { SnakeEventsComponent } from '../snake-events/snake-events.component';
 import { SnakeEvent } from '../snake-event';
 import { GameAction } from '../game-action';
+import { SnakeGameActionsComponent } from '../snake-game-actions/snake-game-actions.component';
 
 @Component({
   selector: 'app-snake-game',
@@ -15,8 +15,9 @@ import { GameAction } from '../game-action';
   imports: [
     CommonModule,
     NgxSnakeModule,
-    TimerFormatterPipe,
+
     SnakeEventsComponent,
+    SnakeGameActionsComponent,
   ],
   templateUrl: './snake-game.component.html',
   styleUrl: './snake-game.component.scss',
@@ -29,7 +30,6 @@ export class SnakeGameComponent implements OnInit {
   currentPlayer!: Player;
   pointsCounter: number = 0;
   currentGameStatus: GameAction = GameAction.PENDING;
-  allGameAction = GameAction;
   private isTimerRunning: boolean = false;
   startTime: number = 0;
   timer: number = 0;
