@@ -1,6 +1,8 @@
-import "./ShopingList.css";
+/* eslint-disable react/prop-types */
+import "./ShoppingList.css";
+import { v1 as uuidv1 } from "uuid";
 
-const ShopingList = (props) => {
+const ShoppingList = (props) => {
   const handleRightMouseButtonClick = (event, item) => {
     event.preventDefault();
     props.deleteProd(item);
@@ -11,7 +13,7 @@ const ShopingList = (props) => {
         <h2>Lista produktów w koszyku:</h2>
         {props.shoppingList.map((prod) => (
           <li
-            key={prod.nazwa}
+            key={uuidv1()}
             onContextMenu={(e) => handleRightMouseButtonClick(e, prod)}
           >
             {prod.nazwa}
@@ -22,4 +24,4 @@ const ShopingList = (props) => {
   );
 };
 
-export default ShopingList;
+export default ShoppingList;
