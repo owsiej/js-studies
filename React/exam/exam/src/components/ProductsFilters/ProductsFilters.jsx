@@ -3,21 +3,15 @@
 import "./ProductsFilters.css";
 
 const ProductsFilters = (props) => {
-  const { productsList, filter } = props;
+  const { productsList, foodFilter } = props;
 
   const categories = Array.from(
     new Set(productsList.map((el) => el.kategoria))
   );
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    filter(e);
-  };
-
   return (
     <>
-      <form className="filterForm" onSubmit={handleSubmit}>
+      <form className="filterForm" onChange={foodFilter}>
         <label htmlFor="name">Wyszukaj po nazwie produktu:</label>
         <input type="text" id="name" name="filterName" />
         Kategorie:
@@ -29,7 +23,10 @@ const ProductsFilters = (props) => {
             </option>
           ))}
         </select>
-        <input type="submit" value="Wyszukaj" />
+        <label>
+          Tylko produkty spożywcze
+          <input type="checkbox" name="isFoodProduct" />
+        </label>
       </form>
     </>
   );

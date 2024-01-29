@@ -23,15 +23,21 @@ function App() {
     setShoppingList([...shoppingList]);
   };
 
-  const submitFilter = (e) => {
-    const nameFilter = e.currentTarget.elements.filterName.value;
+  const handleFoodFilter = (e) => {
+    const nameFilter = e.currentTarget.elements.filterName.value.toLowerCase();
     const categoryFilter = e.currentTarget.elements.category.value;
+    const isFoodProduct = e.currentTarget.elements.isFoodProduct.checked;
+
     setProductListToDisplay(
-      productList.filter((prod) =>
-        categoryFilter
+      productList.filter((prod) => {
+        const filterData = categoryFilter
           ? prod.kategoria === categoryFilter && prod.nazwa.includes(nameFilter)
-          : prod.nazwa.includes(nameFilter)
-      )
+          : prod.nazwa.includes(nameFilter);
+        if (isFoodProduct) {
+          return filterData && prod.produktSpozywczy;
+        }
+        return filterData;
+      })
     );
   };
 
@@ -47,7 +53,10 @@ function App() {
           deleteProd={deleteFromShoppingCart}
         />
       </div>
-      <ProductsFilters productsList={productList} filter={submitFilter} />
+      <ProductsFilters
+        productsList={productList}
+        foodFilter={handleFoodFilter}
+      />
     </>
   );
 }
