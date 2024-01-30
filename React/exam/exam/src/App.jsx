@@ -4,18 +4,22 @@ import { products } from "../src/common/consts/produkty.js";
 import ProductsList from "./components/ProductsList/ProductsList";
 import ShoppingList from "./components/ShoppingList/ShoppingList.jsx";
 import ProductsFilters from "./components/ProductsFilters/ProductsFilters.jsx";
+import AddProducts from "./components/AddProducts/AddProducts.jsx";
 
 function App() {
   const [productList, setProductList] = useState(products);
   const [productListToDisplay, setProductListToDisplay] = useState(productList);
   const [shoppingList, setShoppingList] = useState([]);
+  const [maxCurrentId, setMaxCurrentId] = useState(
+    productList[productList.length - 1].id + 1
+  );
 
-  const addToShoppingCart = (itemToAdd) => {
+  const handleAddToShoppingCart = (itemToAdd) => {
     shoppingList.push(itemToAdd);
     setShoppingList([...shoppingList]);
   };
 
-  const deleteFromShoppingCart = (itemToDelete) => {
+  const handleDeleteFromShoppingCart = (itemToDelete) => {
     const indexProductToRemove = shoppingList.findIndex(
       (prod) => prod.nazwa === itemToDelete.nazwa
     );
@@ -41,22 +45,42 @@ function App() {
     );
   };
 
+  const handleAddNewProd = (e) => {
+    const productName = e.currentTarget.elements.prodName.value;
+    const categoryName = e.currentTarget.elements.prodCat.value;
+    const isFoodProduct = e.currentTarget.elements.isProdFood.checked;
+    const prodId = maxCurrentId;
+    setMaxCurrentId(prodId + 1);
+    const newProduct = {
+      id: prodId,
+      nazwa: productName,
+      kategoria: categoryName,
+      produktSpozywczy: isFoodProduct,
+    };
+
+    productList.push(newProduct);
+    setProductList([...productList]);
+    setProductListToDisplay([...productList]);
+  };
   return (
     <>
       <div className="lists">
         <ProductsList
           productsList={productListToDisplay}
-          addProd={addToShoppingCart}
+          addProdToCart={handleAddToShoppingCart}
         />
         <ShoppingList
           shoppingList={shoppingList}
-          deleteProd={deleteFromShoppingCart}
+          deleteProd={handleDeleteFromShoppingCart}
         />
       </div>
-      <ProductsFilters
-        productsList={productList}
-        foodFilter={handleFoodFilter}
-      />
+      <div className="lists">
+        <ProductsFilters
+          productsList={productList}
+          foodFilter={handleFoodFilter}
+        />
+        <AddProducts addNewProd={handleAddNewProd} />
+      </div>
     </>
   );
 }

@@ -3,15 +3,16 @@ import "./ShoppingList.css";
 import { v1 as uuidv1 } from "uuid";
 
 const ShoppingList = (props) => {
+  const { shoppingList, deleteProd } = props;
   const handleRightMouseButtonClick = (event, item) => {
     event.preventDefault();
-    props.deleteProd(item);
+    deleteProd(item);
   };
   return (
     <>
       <ul>
         <h2>Lista produktów w koszyku:</h2>
-        {props.shoppingList.map((prod) => (
+        {shoppingList.map((prod) => (
           <li
             key={uuidv1()}
             onContextMenu={(e) => handleRightMouseButtonClick(e, prod)}

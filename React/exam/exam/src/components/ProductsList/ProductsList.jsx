@@ -2,16 +2,14 @@
 import "./ProductsList.css";
 
 const ProductsList = (props) => {
-  const handleLeftClickOnProduct = (item) => {
-    props.addProd(item);
-  };
+  const { productsList, addProdToCart } = props;
 
   return (
     <>
       <ul>
         <h2>Lista dostępnych produktów:</h2>
-        {props.productsList.map((prod) => (
-          <li key={prod.id} onClick={() => handleLeftClickOnProduct(prod)}>
+        {productsList.map((prod) => (
+          <li key={prod.id} onClick={() => addProdToCart(prod)}>
             {prod.nazwa}
           </li>
         ))}
