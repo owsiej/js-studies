@@ -19,11 +19,8 @@ function App() {
     setShoppingList([...shoppingList]);
   };
 
-  const handleDeleteFromShoppingCart = (itemToDelete) => {
-    const indexProductToRemove = shoppingList.findIndex(
-      (prod) => prod.nazwa === itemToDelete.nazwa
-    );
-    shoppingList.splice(indexProductToRemove, 1);
+  const handleDeleteFromShoppingCart = (itemIndexToDelete) => {
+    shoppingList.splice(itemIndexToDelete, 1);
     setShoppingList([...shoppingList]);
   };
 
@@ -46,8 +43,8 @@ function App() {
   };
 
   const handleAddNewProd = (e) => {
-    const productName = e.currentTarget.elements.prodName.value;
-    const categoryName = e.currentTarget.elements.prodCat.value;
+    const productName = e.target.prodName.value;
+    const categoryName = e.target.prodCat.value;
     const isFoodProduct = e.currentTarget.elements.isProdFood.checked;
     const prodId = maxCurrentId;
     setMaxCurrentId(prodId + 1);

@@ -1,21 +1,36 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import "./ShoppingList.css";
-import { v1 as uuidv1 } from "uuid";
 
 const ShoppingList = (props) => {
   const { shoppingList, deleteProd } = props;
-  const handleRightMouseButtonClick = (event, item) => {
+  const [prodStyle, setProdStyle] = useState([]);
+
+  const handleRightMouseButtonClick = (event, idx) => {
     event.preventDefault();
-    deleteProd(item);
+    prodStyle[idx] !== "line-through"
+      ? (prodStyle[idx] = "line-through")
+      : (prodStyle[idx] = "none");
+    setProdStyle([...prodStyle]);
+  };
+
+  const handleDeleteProd = (idx) => {
+    prodStyle.splice(idx, 1);
+    setProdStyle([...prodStyle]);
+    deleteProd(idx);
   };
   return (
     <>
       <ul>
         <h2>Lista produktów w koszyku:</h2>
-        {shoppingList.map((prod) => (
+        {shoppingList.map((prod, index) => (
           <li
-            key={uuidv1()}
-            onContextMenu={(e) => handleRightMouseButtonClick(e, prod)}
+            style={{
+              textDecoration: `${prodStyle[index] ?? "none"}`,
+            }}
+            key={index}
+            onContextMenu={(e) => handleRightMouseButtonClick(e, index)}
+            onClick={() => handleDeleteProd(index)}
           >
             {prod.nazwa}
           </li>

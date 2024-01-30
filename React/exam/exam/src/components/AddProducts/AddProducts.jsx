@@ -12,6 +12,7 @@ const AddProducts = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     props.addNewProd(e);
     setFormData({
       prodName: "",
