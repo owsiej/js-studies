@@ -8,9 +8,8 @@ const ShoppingList = (props) => {
 
   const handleRightMouseButtonClick = (event, idx) => {
     event.preventDefault();
-    prodStyle[idx] !== "line-through"
-      ? (prodStyle[idx] = "line-through")
-      : (prodStyle[idx] = "none");
+    prodStyle[idx] =
+      prodStyle[idx] !== "line-through" ? "line-through" : "none";
     setProdStyle([...prodStyle]);
   };
 

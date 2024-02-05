@@ -32,8 +32,9 @@ function App() {
     setProductListToDisplay(
       productList.filter((prod) => {
         const filterData = categoryFilter
-          ? prod.kategoria === categoryFilter && prod.nazwa.includes(nameFilter)
-          : prod.nazwa.includes(nameFilter);
+          ? prod.kategoria === categoryFilter &&
+            prod.nazwa.toLowerCase().includes(nameFilter)
+          : prod.nazwa.toLowerCase().includes(nameFilter);
         if (isFoodProduct) {
           return filterData && prod.produktSpozywczy;
         }
@@ -45,7 +46,7 @@ function App() {
   const handleAddNewProd = (e) => {
     const productName = e.target.prodName.value;
     const categoryName = e.target.prodCat.value;
-    const isFoodProduct = e.currentTarget.elements.isProdFood.checked;
+    const isFoodProduct = e.target.isProdFood.checked;
     const prodId = maxCurrentId;
     setMaxCurrentId(prodId + 1);
     const newProduct = {
