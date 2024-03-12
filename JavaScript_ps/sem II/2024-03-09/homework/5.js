@@ -4,11 +4,12 @@ If the object is last, go back to the beginning of the array:
 
 
 */
+
 const sample = [
   {
     x: 1,
     y: "object one value",
-    operation: () => "object one prafix" + this.x + this.y,
+    operation: () => "object one prefix" + this.x + this.y,
   },
   {
     x: 2,
@@ -21,3 +22,10 @@ const sample = [
     operation: () => "object three prefix" + this.x + this.y,
   },
 ];
+const sample2 = {
+  x: 3,
+  y: "object three value",
+  operation() {
+    return "object three prefix" + this.x + this.y;
+  },
+};
