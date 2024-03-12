@@ -1,20 +1,10 @@
 @import "bootstrap";
 
-.container {
-    position: relative;
-    left: 250px;
-    top: 150px;
-}
-
 .form-label {
     padding-bottom: 1px;
     padding-right: 5px;
     padding-left: 10px;
     padding-top: 4px;
-}
-
-h1 {
-    text-shadow: #42a948 10px 7px 5px;
 }
 
 .ng-valid[required],

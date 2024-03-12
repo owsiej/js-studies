@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Player } from '../player';
 import { FormsModule } from '@angular/forms';
 import moment from 'moment';
-import { SnakeService } from '../snake.service';
-import { interval, takeWhile } from 'rxjs';
 
 @Component({
   selector: 'app-snake-form',
@@ -13,20 +11,15 @@ import { interval, takeWhile } from 'rxjs';
   templateUrl: './snake-form.component.html',
   styleUrl: './snake-form.component.scss',
 })
-export class SnakeFormComponent implements OnInit {
-  constructor(private snakeService: SnakeService) {}
-  testPlayer!: Player;
+export class SnakeFormComponent {
+  @Input() testPlayer!: Player;
 
-  ngOnInit(): void {
-    this.snakeService.currentPlayer.subscribe(
-      (player) => (this.testPlayer = player)
-    );
-  }
+  @Output() public submit = new EventEmitter();
 
   onSubmit() {
-    this.snakeService.updateCurrentPlayer(this.testPlayer);
-    this.snakeService.changeSubmit(true);
+    this.submit.emit();
   }
+
   generateDays(): Array<number> {
     let numberOfDays: number = 0;
     if (

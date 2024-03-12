@@ -1,78 +1,76 @@
-<div class="container w-25">
-    <form (ngSubmit)="onSubmit()" #snakeForm="ngForm">
-        <h1 style="width: 130%;">Welcome to the Snake Game !</h1>
-        <div class="form-group">
-            <label class="form-label my-text fs-5" for="name">Player
-                name</label>
-            <input type="text"
-                class="form-control"
-                name="playerName"
-                id="name"
-                placeholder="your name"
-                required
-                minlength="3"
-                maxlength="15"
-                pattern="^[0-9a-zA-z]+"
-                [(ngModel)]="testPlayer.name"
-                #playerName="ngModel">
-            <div [hidden]="playerName.valid || playerName.pristine"
-                class="alert alert-danger">
-                <p *ngIf="playerName.errors?.['required']">Player name is
-                    required.</p>
-                <p *ngIf="playerName.errors?.['minlength']">Player name must
-                    have at least 3 characters.</p>
-                <p *ngIf="playerName.errors?.['pattern']">Player name can't
-                    have
-                    special symbols/whitespaces.</p>
+<form (ngSubmit)="onSubmit()" #snakeForm="ngForm">
+    <div class="form-group">
+        <label class="form-label my-text fs-5" for="name">Player
+            name</label>
+        <input type="text"
+            class="form-control"
+            name="playerName"
+            id="name"
+            placeholder="your name"
+            required
+            minlength="3"
+            maxlength="15"
+            pattern="^[0-9a-zA-z]+"
+            autocomplete="given-name"
+            [(ngModel)]="testPlayer.name"
+            #playerName="ngModel">
+        <div [hidden]="playerName.valid || playerName.pristine"
+            class="alert alert-danger">
+            <p *ngIf="playerName.errors?.['required']">Player name is
+                required.</p>
+            <p *ngIf="playerName.errors?.['minlength']">Player name must
+                have at least 3 characters.</p>
+            <p *ngIf="playerName.errors?.['pattern']">Player name can't
+                have
+                special symbols/whitespaces.</p>
 
-            </div>
         </div>
-        <div class="form-group">
-            <label class="form-label my-text fs-5" for="email">Player
-                e-mail</label>
-            <input type="email"
-                class="form-control"
-                name="playerEmail"
-                id="email"
-                placeholder="your@email"
-                [(ngModel)]="testPlayer.email"
-                ngModel email
-                required
-                #playerEmail="ngModel">
-            <div [hidden]="playerEmail.valid || playerEmail.pristine"
-                class="alert alert-danger">Wrong e-mail adress.</div>
-        </div>
-        <div class="form-group">
-            <label class="form-label my-text fs-5" for="playerDateOfbirth">Date
-                of
-                birth</label>
-            <div>
-                <label class="form-label" for="years">Year</label>
-                <select name="years" id="years"
-                    [(ngModel)]="testPlayer.dateOfBirth.year"
-                    (change)="resetDayNumber()">
-                    <option *ngFor="let year of generateYears()"
-                        [value]="year">{{year}}</option>
-                </select>
-                <label class="form-label" for="months">Month</label>
-                <select name="months" id="months"
-                    [(ngModel)]="testPlayer.dateOfBirth.month"
-                    (change)="resetDayNumber()">
-                    <option *ngFor="let month of generateMonths()"
-                        [value]="month">{{month}}</option>
-                </select>
-                <label class="form-label" for="days">Day</label>
-                <select name="days" id="days"
-                    [(ngModel)]="testPlayer.dateOfBirth.day">
-                    <option *ngFor="let day of generateDays()"
-                        [value]="day">{{day}}</option>
-                </select>
+    </div>
+    <div class="form-group">
+        <label class="form-label my-text fs-5" for="email">Player
+            e-mail</label>
+        <input type="email"
+            class="form-control"
+            name="playerEmail"
+            id="email"
+            placeholder="your@email"
+            [(ngModel)]="testPlayer.email"
+            ngModel email
+            required
+            autocomplete="off"
+            #playerEmail="ngModel">
+        <div [hidden]="playerEmail.valid || playerEmail.pristine"
+            class="alert alert-danger">Wrong e-mail adress.</div>
+    </div>
+    <div class="form-group">
+        <p class="form-label my-text fs-5">Date
+            of
+            birth</p>
+        <div>
+            <label class="form-label" for="years">Year</label>
+            <select name="years" id="years"
+                [(ngModel)]="testPlayer.dateOfBirth.year"
+                (change)="resetDayNumber()">
+                <option *ngFor="let year of generateYears()"
+                    [value]="year">{{year}}</option>
+            </select>
+            <label class="form-label" for="months">Month</label>
+            <select name="months" id="months"
+                [(ngModel)]="testPlayer.dateOfBirth.month"
+                (change)="resetDayNumber()">
+                <option *ngFor="let month of generateMonths()"
+                    [value]="month">{{month}}</option>
+            </select>
+            <label class="form-label" for="days">Day</label>
+            <select name="days" id="days"
+                [(ngModel)]="testPlayer.dateOfBirth.day">
+                <option *ngFor="let day of generateDays()"
+                    [value]="day">{{day}}</option>
+            </select>
 
-            </div>
         </div>
-        <button type="submit"
-            class="btn btn-success p-3 mt-2 fs-4"
-            [disabled]="!snakeForm.form.valid">Start Game</button>
-    </form>
-
-</div>
+    </div>
+    <button type="submit"
+        class="btn btn-success p-3 mt-2 fs-4"
+        [disabled]="!snakeForm.form.valid">Start Game</button>
+</form>

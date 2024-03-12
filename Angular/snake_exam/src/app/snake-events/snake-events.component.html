@@ -2,8 +2,8 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <label class="my-text" for="action">Action filter</label>
-            <select [(ngModel)]="selectedAction" name="actions"
+            <label class="my-text" for="actions">Action filter</label>
+            <select [(ngModel)]="selectedAction" name="actions" id="actions"
                 (change)="updateDisplayedEvents()"
                 class="form-select">
                 <option selected value="All actions">All Actions</option>

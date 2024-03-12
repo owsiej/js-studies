@@ -8,6 +8,7 @@ import { SnakeEventsComponent } from '../snake-events/snake-events.component';
 import { SnakeEvent } from '../snake-event';
 import { GameAction } from '../game-action';
 import { SnakeGameActionsComponent } from '../snake-game-actions/snake-game-actions.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-snake-game',
@@ -30,21 +31,31 @@ export class SnakeGameComponent implements OnInit {
   currentPlayer!: Player;
   pointsCounter: number = 0;
   currentGameStatus: GameAction = GameAction.PENDING;
+  currentSubmitState!: boolean;
   private isTimerRunning: boolean = false;
   startTime: number = 0;
   timer: number = 0;
   isAlertVisible: boolean = false;
 
-  constructor(private snakeService: SnakeService) {}
+  constructor(private _snakeService: SnakeService, private _router: Router) {
+    this._snakeService.currentSubmitState.subscribe((state) => {
+      this.currentSubmitState = state;
+    });
+
+    if (this.currentSubmitState === false) {
+      this._router.navigate(['/intro-page']);
+    }
+  }
   ngOnInit(): void {
-    this.snakeService.currentPlayer.subscribe((player) => {
+    this._snakeService.currentPlayer.subscribe((player) => {
       this.currentPlayer = player;
     });
   }
 
   renderFormPage() {
-    this.snakeService.changeSubmit(false);
-    this.snakeService.setPlayerDataOnDefault();
+    this._snakeService.changeSubmit(false);
+    this._snakeService.setPlayerDataOnDefault();
+    this._router.navigate(['/intro-page']);
   }
   changeGameStatus(status: GameAction) {
     this.currentGameStatus = status;
