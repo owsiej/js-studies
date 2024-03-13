@@ -27,20 +27,19 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="form-label my-text fs-5" for="email">Player
-            e-mail</label>
-        <input type="email"
+        <label class="form-label my-text fs-5" for="token">Player
+            token</label>
+        <input type="token"
             class="form-control"
-            name="playerEmail"
-            id="email"
-            placeholder="your@email"
-            [(ngModel)]="testPlayer.email"
-            ngModel email
+            name="playerToken"
+            id="token"
+            placeholder="your token"
+            [(ngModel)]="testPlayer.token"
             required
             autocomplete="off"
-            #playerEmail="ngModel">
-        <div [hidden]="playerEmail.valid || playerEmail.pristine"
-            class="alert alert-danger">Wrong e-mail adress.</div>
+            #playerToken="ngModel">
+        <!-- <div [hidden]="playerToken.valid || playerToken.pristine"
+            class="alert alert-danger">Wrong e-mail adress.</div> -->
     </div>
     <div class="form-group">
         <p class="form-label my-text fs-5">Date

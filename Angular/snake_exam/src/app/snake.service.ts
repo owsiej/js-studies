@@ -15,7 +15,7 @@ export class SnakeService {
 
   private playerSource = new BehaviorSubject<Player>({
     name: '',
-    email: '',
+    token: '',
     dateOfBirth: {
       year: 2023,
       month: 'January',
@@ -35,7 +35,7 @@ export class SnakeService {
   setPlayerDataOnDefault() {
     this.playerSource.next({
       name: '',
-      email: '',
+      token: '',
       dateOfBirth: {
         year: 2023,
         month: 'January',
