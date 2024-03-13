@@ -1,17 +1,17 @@
-import "./Login.css";
+import "./Register.css";
+
 import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import useAutch from "../src/hooks/useAutch";
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  useAutch();
+
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate("/register");
+    navigate("/login");
   };
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -23,17 +23,23 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const users = JSON.parse(localStorage.getItem("registeredUsers"));
-    const loginUser = users.find((user) => user.username === username);
-    loginUser
-      ? loginUser.password === password
-        ? navigate("/dashboard")
-        : (setUsername(""), setPassword(""))
-      : (setUsername(""), setPassword(""));
+    const newUser = {
+      username: username,
+      password: password,
+    };
+    const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers"));
+    console.log(registeredUsers);
+    if (!registeredUsers) {
+      localStorage.setItem("registeredUsers", JSON.stringify([newUser]));
+    } else {
+      registeredUsers.push(newUser);
+      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+    }
+    navigate("/login");
   };
   return (
     <>
-      <button onClick={handleButtonClick}>Go to register page</button>
+      <button onClick={handleButtonClick}>Go to login</button>
       <form onSubmit={handleSubmit}>
         <label>Username</label>
         <input type="text" value={username} onChange={handleUsernameChange} />
@@ -43,10 +49,10 @@ const Login = () => {
           value={password}
           onChange={handlePasswordChange}
         />
-        <button type="submit">Zaloguj</button>
+        <button type="submit">Register</button>
       </form>
     </>
   );
 };
 
-export default Login;
+export default Register;

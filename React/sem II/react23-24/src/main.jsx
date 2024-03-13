@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { useEffect } from "react";
 import Login from "../Login/Login.jsx";
-
+import Register from "../src/components/Register/Register.jsx";
 const RedirectToDashboard = () => {
   const navigate = useNavigate(); // przypisanie do zmiennej wartości hooka
   // useNavigate z biblioteki react-router
@@ -33,8 +33,12 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/Login",
+    path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 
