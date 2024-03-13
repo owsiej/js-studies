@@ -9,23 +9,29 @@ const sample = [
   {
     x: 1,
     y: "object one value",
-    operation: () => "object one prefix" + this.x + this.y,
+    operation() {
+      return `object one prefix ${this.x} ${this.y}`;
+    },
   },
   {
     x: 2,
     y: "object two value",
-    operation: () => "object two prefix" + this.x + this.y,
+    operation() {
+      return `object two prefix ${this.x} ${this.y}`;
+    },
   },
   {
     x: 3,
     y: "object three value",
-    operation: () => "object three prefix" + this.x + this.y,
+    operation() {
+      return `object three prefix ${this.x} ${this.y}`;
+    },
   },
 ];
-const sample2 = {
-  x: 3,
-  y: "object three value",
-  operation() {
-    return "object three prefix" + this.x + this.y;
-  },
-};
+
+function callNext(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i].operation.call(arr[(i + 1) % arr.length]));
+  }
+}
+callNext(sample);
