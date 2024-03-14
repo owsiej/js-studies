@@ -28,7 +28,6 @@ const Register = () => {
       password: password,
     };
     const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers"));
-    console.log(registeredUsers);
     if (!registeredUsers) {
       localStorage.setItem("registeredUsers", JSON.stringify([newUser]));
     } else {
