@@ -38,7 +38,7 @@ export class SnakeGameComponent implements OnInit {
   isAlertVisible: boolean = false;
 
   constructor(private _snakeService: SnakeService, private _router: Router) {
-    this._snakeService.currentSubmitState.subscribe((state) => {
+    this._snakeService.currentSubmitState.subscribe((state: boolean) => {
       this.currentSubmitState = state;
     });
 
@@ -47,7 +47,7 @@ export class SnakeGameComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this._snakeService.currentPlayer.subscribe((player) => {
+    this._snakeService.currentPlayer.subscribe((player: Player) => {
       this.currentPlayer = player;
     });
   }

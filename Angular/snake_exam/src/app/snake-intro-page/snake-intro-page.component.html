@@ -1,5 +1,11 @@
 <div class="container w-25">
     <h1 style="width: 130%;">Welcome to the Snake Game !</h1>
-    <app-snake-form (submit)="onSubmitAction()"
-        [testPlayer]="testPlayer"></app-snake-form>
+    <app-snake-form (submit)="onSubmitAction()" [testPlayer]="testPlayer"></app-snake-form>
+    <div class="scores">
+        <h3>HIGHSCORES</h3>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+        </ul>
+    </div>
 </div>

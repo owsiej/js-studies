@@ -2,10 +2,17 @@
 
 .container {
     position: relative;
-    left: 250px;
+    left: 150px;
     top: 150px;
+    display: flex;
 }
 
-h1 {
+h1, h3 {
     text-shadow: #42a948 10px 7px 5px;
 }
+
+// .scores {
+//     position: relative;
+//     left: 1370px;
+//     bottom: 140px
+// }

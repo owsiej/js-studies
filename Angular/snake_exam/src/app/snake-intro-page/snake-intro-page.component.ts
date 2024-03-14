@@ -17,7 +17,7 @@ export class SnakeIntroPageComponent implements OnInit {
 
   ngOnInit(): void {
     this._snakeService.currentPlayer.subscribe(
-      (player) => (this.testPlayer = player)
+      (player: Player) => (this.testPlayer = player)
     );
   }
 
