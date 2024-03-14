@@ -1,7 +1,8 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { AgeVerificationComponent } from './age-verification/age-verification.component';
 import { ShopComponent } from './shop/shop.component';
+import { HttpClientModule } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,5 +16,6 @@ export const appConfig: ApplicationConfig = {
         component: ShopComponent,
       },
     ]),
+    importProvidersFrom(HttpClientModule),
   ],
 };

@@ -1,6 +1,6 @@
 export interface Player {
   name: string;
-  email: string;
+  token: string;
   dateOfBirth: {
     year: number;
     month: string;
