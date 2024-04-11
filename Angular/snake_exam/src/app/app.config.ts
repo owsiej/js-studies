@@ -2,6 +2,7 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { SnakeIntroPageComponent } from './snake-intro-page/snake-intro-page.component';
 import { SnakeGameComponent } from './snake-game/snake-game.component';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,5 +20,6 @@ export const appConfig: ApplicationConfig = {
         redirectTo: 'intro-page',
       },
     ]),
+    provideHttpClient(),
   ],
 };

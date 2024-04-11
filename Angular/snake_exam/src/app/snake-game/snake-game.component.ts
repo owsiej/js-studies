@@ -9,6 +9,7 @@ import { SnakeEvent } from '../snake-event';
 import { GameAction } from '../game-action';
 import { SnakeGameActionsComponent } from '../snake-game-actions/snake-game-actions.component';
 import { Router } from '@angular/router';
+import { HighscoresService } from '../highscores.service';
 
 @Component({
   selector: 'app-snake-game',
@@ -16,7 +17,6 @@ import { Router } from '@angular/router';
   imports: [
     CommonModule,
     NgxSnakeModule,
-
     SnakeEventsComponent,
     SnakeGameActionsComponent,
   ],
@@ -37,7 +37,11 @@ export class SnakeGameComponent implements OnInit {
   timer: number = 0;
   isAlertVisible: boolean = false;
 
-  constructor(private _snakeService: SnakeService, private _router: Router) {
+  constructor(
+    private _snakeService: SnakeService,
+    private _router: Router,
+    private _highscores: HighscoresService
+  ) {
     this._snakeService.currentSubmitState.subscribe((state: boolean) => {
       this.currentSubmitState = state;
     });
@@ -120,6 +124,13 @@ export class SnakeGameComponent implements OnInit {
     this.sendEvent(
       new SnakeEvent(GameAction.DEAD, this.timer, this.pointsCounter)
     );
+    this._highscores
+      .postScore(
+        this.currentPlayer.name,
+        this.pointsCounter,
+        this.currentPlayer.token
+      )
+      .subscribe((response) => console.log(response));
     this.showAlert();
   }
   onFoodEaten() {
