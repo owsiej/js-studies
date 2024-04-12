@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { GameHighscoresComponent } from '../game-highscores/game-highscores.component';
 import { HighscoresService } from '../highscores.service';
 import { Score } from '../score';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-snake-intro-page',
@@ -24,12 +25,13 @@ export class SnakeIntroPageComponent implements OnInit {
   public globalHighscores: Array<Score> = [];
 
   ngOnInit(): void {
-    this._snakeService.currentPlayer.subscribe(
-      (player: Player) => (this.testPlayer = player)
-    );
-    this._highscores
-      .loadHighscores()
-      .subscribe((data) => (this.globalHighscores = data));
+    combineLatest([
+      this._snakeService.currentPlayer,
+      this._highscores.loadHighscores(),
+    ]).subscribe(([player, score]) => {
+      this.testPlayer = player;
+      this.globalHighscores = score;
+    });
   }
 
   onSubmitAction() {
