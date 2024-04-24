@@ -159,3 +159,25 @@ callback vs Promise - callback jest funkcja a Promise obiektem
                     - callback przymuje argumenty a Promise zwraca wartości
                     - callback wspiera success/error a Promise nic nie obsługuje ale przekazuje wartości
                     - callback może być wywołany wiele razy a Promise tylko raz
+
+Wzorce projektowe:
+DO TWORZENIA NOWYCH OBIEKTÓW (CREATIONAL):
+  - Closure - posiada dostęp do zakresu funkcji w momencie jej tworzenia
+            - tworzenie funkcji wewnątrz funkcji i zwrócenie jej
+            - zwrócona funkcja posiada dostępu do zakresu funkcji, z której została zwrócona, mimo iż konteks tej nadrzędnej funkcji skończył się
+  - podejście Modułowe - rozbicie kodu na mniejsze kawałki, podział na pliki i importowanie ich
+                       - aktualnie obowiązuje podejście ES6 Modules
+  - Singleton - kawałek kodu powinien być odpalony tylko raz albo dana zmienna powinna być tworzona tylko raz i dzielona przez czas działania apki
+DO MODYFIKACJI ISTNIEJĄCYCH OBIEKTOW (STRUCTURAL)
+  - Wrapper - otoczenie istniejącej funkcji dodatkową funkcją czyli wrapperem
+            - dodaje dodatkową funkcjonalność do istniejących funkcji
+            - działa na zasadzie callbacków
+            - dobrze działa jako cachowanie danych
+  - Curry - podstawa programowania funkcyjnego
+          - składa się z unary functions (funkcji jednoargumentowych), gdzie jedna taka funkcja zwraca kolejną
+          - polega na domknięciach (closures)
+  - Composition - komponowanie mniejszych jednostek w większe
+                - argumentem wejściowym jednej funkcji są dane zwrócone z poprzedniej funkcji
+  - Decorator - używany do zmiany/powiększania istniejących obiektów/klas/metod/parametrów
+              - z reguły oznaczony przedrostkiem @
+  - Mixin - dodawanie funkcjonalności do obiektu poprzec zmiksowanie go z innym obiektem
