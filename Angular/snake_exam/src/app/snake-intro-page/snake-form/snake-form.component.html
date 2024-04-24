@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()" #snakeForm="ngForm">
+<form (submit)="onSubmit()" #snakeForm="ngForm">
     <div class="form-group">
         <label class="form-label my-text fs-5" for="name">Player
             name</label>
@@ -38,8 +38,7 @@
             required
             autocomplete="off"
             #playerToken="ngModel">
-        <!-- <div [hidden]="playerToken.valid || playerToken.pristine"
-            class="alert alert-danger">Wrong e-mail adress.</div> -->
+
     </div>
     <div class="form-group">
         <p class="form-label my-text fs-5">Date
@@ -69,7 +68,13 @@
 
         </div>
     </div>
-    <button type="submit"
+    <div class="form-group">
+        <app-game-theme
+            [(currentGameTheme)]="currentGameTheme"></app-game-theme>
+
+    </div>
+
+    <button
         class="btn btn-success p-3 mt-2 fs-4"
         [disabled]="!snakeForm.form.valid">Start Game</button>
 </form>

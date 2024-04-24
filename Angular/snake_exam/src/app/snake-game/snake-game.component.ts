@@ -1,15 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
-import { SnakeService } from '../snake.service';
-import { Player } from '../player';
+import { SnakeService } from '../services/snake.service';
+import { Player } from '../models/player';
 import { interval, takeWhile } from 'rxjs';
-import { SnakeEventsComponent } from '../snake-events/snake-events.component';
-import { SnakeEvent } from '../snake-event';
-import { GameAction } from '../game-action';
-import { SnakeGameActionsComponent } from '../snake-game-actions/snake-game-actions.component';
-import { Router } from '@angular/router';
-import { HighscoresService } from '../highscores.service';
+import { SnakeEventsComponent } from './snake-events/snake-events.component';
+import { SnakeEvent } from '../models/snake-event';
+import { GameAction } from '../models/game-action';
+import { SnakeGameActionsComponent } from './snake-game-actions/snake-game-actions.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HighscoresService } from '../services/highscores.service';
+import { EndGameAlertComponent } from './end-game-alert/end-game-alert.component';
+import { Score } from '../models/score';
+import { GameThemes } from '../models/game-themes';
+import { GameThemeComponent } from '../style-components/game-theme/game-theme.component';
 
 @Component({
   selector: 'app-snake-game',
@@ -19,6 +23,8 @@ import { HighscoresService } from '../highscores.service';
     NgxSnakeModule,
     SnakeEventsComponent,
     SnakeGameActionsComponent,
+    EndGameAlertComponent,
+    GameThemeComponent,
   ],
   templateUrl: './snake-game.component.html',
   styleUrl: './snake-game.component.scss',
@@ -28,32 +34,39 @@ export class SnakeGameComponent implements OnInit {
   private _snake!: NgxSnakeComponent;
   @ViewChild(SnakeEventsComponent)
   private eventComponent!: SnakeEventsComponent;
-  currentPlayer!: Player;
-  pointsCounter: number = 0;
-  currentGameStatus: GameAction = GameAction.PENDING;
-  currentSubmitState!: boolean;
+
+  public currentPlayer!: Player;
+  public pointsCounter: number = 0;
+  public playerHighScores!: Score[];
+
+  public currentGameStatus: GameAction = GameAction.PENDING;
+
   private isTimerRunning: boolean = false;
-  startTime: number = 0;
-  timer: number = 0;
-  isAlertVisible: boolean = false;
+  private startTime: number = 0;
+  public timer: number = 0;
+
+  public isAlertVisible: boolean = false;
+  public gameTheme!: GameThemes;
 
   constructor(
     private _snakeService: SnakeService,
     private _router: Router,
-    private _highscores: HighscoresService
+    private _highscores: HighscoresService,
+    private _route: ActivatedRoute
   ) {
-    this._snakeService.currentSubmitState.subscribe((state: boolean) => {
-      this.currentSubmitState = state;
-    });
-
-    if (this.currentSubmitState === false) {
-      this._router.navigate(['/intro-page']);
-    }
+    this._route.params.subscribe(
+      (params) => (this.gameTheme = params['game-theme'])
+    );
   }
+
   ngOnInit(): void {
     this._snakeService.currentPlayer.subscribe((player: Player) => {
       this.currentPlayer = player;
     });
+  }
+
+  handleThemeChange(): void {
+    this._router.navigate(['game-page', this.gameTheme]);
   }
 
   renderFormPage() {
@@ -130,8 +143,13 @@ export class SnakeGameComponent implements OnInit {
         this.pointsCounter,
         this.currentPlayer.token
       )
-      .subscribe((response) => console.log(response));
-    this.showAlert();
+      .subscribe((response) => {
+        console.log(response);
+        this.playerHighScores = response.filter(
+          (score) => score.name === this.currentPlayer.name
+        );
+        this.showAlert();
+      });
   }
   onFoodEaten() {
     this.pointsCounter += 10;

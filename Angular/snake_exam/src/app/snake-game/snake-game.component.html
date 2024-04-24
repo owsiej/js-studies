@@ -12,8 +12,12 @@
                 <h2 class="text-center my-text fs-2">POINTS:
                     {{pointsCounter}}</h2>
 
-                <ngx-snake (foodEaten)="onFoodEaten()"
+                <ngx-snake [ngClass]="gameTheme" (foodEaten)="onFoodEaten()"
                     (gameOver)="onDead()"></ngx-snake>
+                <br>
+                <app-game-theme
+                    [(currentGameTheme)]="gameTheme"
+                    (currentGameThemeChange)="handleThemeChange()"></app-game-theme>
             </div>
         </div>
         <div class="col-4">
@@ -33,11 +37,7 @@
         </div>
 
     </div>
-    <div class="overlay" *ngIf="isAlertVisible">
-        <div class="custom-modal text-center pt-2">
-            <p class="my-text">GAME OVER:</p>
-            <p class="my-text">Your score: {{pointsCounter}}</p>
-            <button class="status-button text-center fs-4 my-text"
-                (click)="hideAlert()">CONTINUE</button>
-        </div>
-    </div>
+    <app-end-game-alert *ngIf="isAlertVisible" [score]="pointsCounter"
+        [playerScores]="playerHighScores"
+        (closeAlertEvent)="hideAlert()"></app-end-game-alert>
+</div>

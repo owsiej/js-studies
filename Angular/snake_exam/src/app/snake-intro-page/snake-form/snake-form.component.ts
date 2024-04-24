@@ -1,23 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Player } from '../player';
+import { Player } from '../../models/player';
 import { FormsModule } from '@angular/forms';
 import moment from 'moment';
+import { GameThemes } from '../../models/game-themes';
+import { GameThemeComponent } from '../../style-components/game-theme/game-theme.component';
 
 @Component({
   selector: 'app-snake-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, GameThemeComponent],
   templateUrl: './snake-form.component.html',
   styleUrl: './snake-form.component.scss',
 })
 export class SnakeFormComponent {
-  @Input() testPlayer!: Player;
+  @Input() public testPlayer!: Player;
 
-  @Output() public submit = new EventEmitter();
+  @Output() public submitEvent = new EventEmitter();
+
+  public currentGameTheme: GameThemes = GameThemes.STANDARD;
 
   onSubmit() {
-    this.submit.emit();
+    this.submitEvent.emit(this.currentGameTheme);
   }
 
   generateDays(): Array<number> {

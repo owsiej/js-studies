@@ -1,9 +1,0 @@
-<div>
-    <h4 class="mt-5 ms-4 my-text">HIGHSCORES</h4>
-    <button class="triangle-button" (click)="sortOrder='asc'"></button>
-    <button class="triangle-button rotate-180" (click)="sortOrder='desc'"></button>
-
-</div>
-<ul>
-    <li *ngFor="let score of highscores | sort:sortOrder | slice:0:10">Name: {{score.name}} Score: {{score.score}}</li>
-</ul>

@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { SnakeIntroPageComponent } from './snake-intro-page/snake-intro-page.component';
 import { SnakeGameComponent } from './snake-game/snake-game.component';
 import { provideHttpClient } from '@angular/common/http';
+import { SubmitGuard } from './guards/submit.guard';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,8 +13,9 @@ export const appConfig: ApplicationConfig = {
         component: SnakeIntroPageComponent,
       },
       {
-        path: 'game-page',
+        path: 'game-page/:game-theme',
         component: SnakeGameComponent,
+        canActivate: [SubmitGuard],
       },
       {
         path: '**',
