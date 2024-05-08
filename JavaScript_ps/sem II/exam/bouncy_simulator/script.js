@@ -10,8 +10,8 @@ The program should show how the ball travels and bounces against the walls.
 Bouncing objects starts in any corner. Assume that 1 and Y positions may vary.
 */
 
-import { board as exampleInput } from "./const/exampleInput.js";
-import { BoardEngine } from "./classes/board_engine.js";
+import { board as exampleInput } from "./const/example-input.js";
+import { BoardEngine } from "./classes/board-engine.js";
 
 const board = new BoardEngine(exampleInput);
 board.createBoardVisualization();

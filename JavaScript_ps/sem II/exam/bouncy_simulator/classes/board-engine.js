@@ -1,6 +1,6 @@
-import { moveDirections, moveMethods } from "../const/moveDirections.js";
+import { moveDirections, moveMethods } from "../const/move-directions.js";
 import { Board } from "./board.js";
-import { squareTypes } from "../const/squareTypes.js";
+import { squareTypes } from "../const/square-types.js";
 
 export class BoardEngine extends Board {
   #currentMoveDirection;

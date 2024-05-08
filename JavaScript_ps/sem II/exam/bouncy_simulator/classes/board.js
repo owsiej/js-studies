@@ -1,4 +1,4 @@
-import { squareTypes } from "../const/squareTypes.js";
+import { squareTypes } from "../const/square-types.js";
 
 export class Board {
   ballCoordinates;
@@ -39,7 +39,7 @@ export class Board {
   }
 
   createBoardVisualization() {
-    const board = this.#createDivElement("", "board");
+    const board = this.#createDivElement("board", "board");
     document.body.appendChild(board);
     for (let i = 0; i < this.numberOfRows; i++) {
       const boardRow = this.#createDivElement("row", `row-${i}`);
