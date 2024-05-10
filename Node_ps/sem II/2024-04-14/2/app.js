@@ -28,9 +28,7 @@
 // run().catch(console.dir);
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const connectionString =
-  "mongodb+srv://admin:zenek123@cluster0.vt4fw96.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
+const connectionString = process.env.MONGO_CONNECTION_STRING;
 const client = new MongoClient(connectionString, {
   //   useNewUrlParser: true,
   //   useUnifiedTopology: true,
@@ -39,8 +37,10 @@ const client = new MongoClient(connectionString, {
 async function main() {
   await client.connect();
 
-  const database = client.db("myDatabase");
-  const tasksCollection = database.collection("tasks");
+  const database = client.db(process.env.MONGO_DATABASE_NAME);
+  const tasksCollection = database.collection(
+    process.env.MONGO_COLLECTION_NAME
+  );
   const tasks = await tasksCollection.find().toArray();
   console.log(tasks);
 }
