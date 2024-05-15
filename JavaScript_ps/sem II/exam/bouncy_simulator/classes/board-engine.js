@@ -16,6 +16,21 @@ export class BoardEngine extends Board {
     return this.#nextPossibleMove;
   }
 
+  isNotBorder(cords) {
+    return !(this.board[cords[0]][cords[1]] === "X");
+  }
+
+  isNotRandom(cords) {
+    return !(this.board[cords[0]][cords[1]] === "Y");
+  }
+
+  handleRandomSquare() {
+    this.updateBallPosition();
+    this.findFieldSquaresNearBallAndChoseOne();
+    this.getMoveDirection(this.ballCoordinates, this.#nextPossibleMove);
+    this.board[this.ballCoordinates[0]][this.ballCoordinates[1]] = "0";
+  }
+
   updateBallPosition() {
     this.updateSquareClass(
       this.ballCoordinates[0],
@@ -32,12 +47,6 @@ export class BoardEngine extends Board {
     this.ballCoordinates = this.#nextPossibleMove;
   }
 
-  isNotBorder(cords) {
-    return !(this.board[cords[0]][cords[1]] === "X");
-  }
-  isNotRandom(cords) {
-    return !(this.board[cords[0]][cords[1]] === "Y");
-  }
   findFieldSquaresNearBallAndChoseOne() {
     const possibleMoves = [];
     const [x, y] = this.ballCoordinates;
@@ -81,13 +90,6 @@ export class BoardEngine extends Board {
         this.#currentMoveDirection = moveDirections["DIAGONAL_DOWN_RIGHT"];
       }
     }
-  }
-
-  handleRandomSquare() {
-    this.updateBallPosition();
-    this.findFieldSquaresNearBallAndChoseOne();
-    this.getMoveDirection(this.ballCoordinates, this.#nextPossibleMove);
-    this.board[this.ballCoordinates[0]][this.ballCoordinates[1]] = "0";
   }
 
   makeMove() {

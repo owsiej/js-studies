@@ -29,4 +29,4 @@ setInterval(() => {
     board.makeBounce();
     board.makeMove();
   }
-}, 200);
+}, 100);

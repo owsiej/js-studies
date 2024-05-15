@@ -54,11 +54,10 @@ export class GameBoard {
   countAliveCellNeighbors(x, y) {
     return this.neighborsCells.reduce((acc, cords) => {
       const [nX, nY] = [cords[0] + x, cords[1] + y];
-      if ((nX < 0) | (nY < 0) | (nX >= this.cols) | (nY >= this.rows)) {
-        return acc;
+      if (!((nX < 0) | (nY < 0) | (nX >= this.cols) | (nY >= this.rows))) {
+        this.board[nX][nY].isCellAlive() ? (acc += 1) : acc;
       }
 
-      this.board[nX][nY].isCellAlive() ? (acc += 1) : acc;
       return acc;
     }, 0);
   }

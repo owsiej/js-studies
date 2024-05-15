@@ -4,9 +4,8 @@ export class Cell extends HTMLElement {
   shouldChangeNextCellState;
   constructor(id) {
     super();
-    const [x, y] = id;
 
-    this.id = `cell-${x}-${y}`;
+    this.id = `cell-${id[0]}-${id[1]}`;
   }
 
   connectedCallback() {
