@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SnakeFormComponent } from './snake-form/snake-form.component';
-import { SnakeService } from '../services/snake.service';
-import { Player } from '../models/player';
+import { SnakeService } from '../../services/snake.service';
+import { Player } from '../../models/player';
 import { Router } from '@angular/router';
 import { GameHighscoresComponent } from './game-highscores/game-highscores.component';
-import { HighscoresService } from '../services/highscores.service';
-import { Score } from '../models/score';
+import { HighscoresService } from '../../services/highscores.service';
+import { Score } from '../../models/score';
 import { EMPTY, Subscription, interval, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GameThemes } from '../models/game-themes';
-import { SnakeBackgroundImage } from '../models/snake-background-image';
-import { BackgroundImageComponent } from '../style-components/background-image/background-image.component';
+import { GameThemes } from '../../models/game-themes';
+import { SnakeBackgroundImage } from '../../models/snake-background-image';
+import { BackgroundImageComponent } from '../base-style/background-image/background-image.component';
 
 @Component({
   selector: 'app-snake-intro-page',
@@ -66,16 +66,9 @@ export class SnakeIntroPageComponent implements OnInit, OnDestroy {
   }
 
   onSubmitAction(theme: GameThemes): void {
-    this._highscores.checkToken(this.testPlayer.token).subscribe((res) => {
-      if (res.success === true) {
-        this._snakeService.updateCurrentPlayer(this.testPlayer);
-        this._snakeService.changeSubmit(true);
-        this._router.navigate(['/game-page', theme]);
-      } else {
-        alert('Invalid token.');
-        this._snakeService.setPlayerDataOnDefault();
-      }
-    });
+    this._snakeService.updateCurrentPlayer(this.testPlayer);
+    this._snakeService.changeSubmit(true);
+    this._router.navigate(['/game-page', theme]);
   }
 
   loadHighscoresOnInterval(): void {

@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxSnakeComponent, NgxSnakeModule } from 'ngx-snake';
-import { SnakeService } from '../services/snake.service';
-import { Player } from '../models/player';
+import { SnakeService } from '../../services/snake.service';
+import { Player } from '../../models/player';
 import { interval, takeWhile } from 'rxjs';
 import { SnakeEventsComponent } from './snake-events/snake-events.component';
-import { SnakeEvent } from '../models/snake-event';
-import { GameAction } from '../models/game-action';
+import { SnakeEvent } from '../../models/snake-event';
+import { GameAction } from '../../models/game-action';
 import { SnakeGameActionsComponent } from './snake-game-actions/snake-game-actions.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HighscoresService } from '../services/highscores.service';
+import { HighscoresService } from '../../services/highscores.service';
 import { EndGameAlertComponent } from './end-game-alert/end-game-alert.component';
-import { Score } from '../models/score';
-import { GameThemes } from '../models/game-themes';
-import { GameThemeComponent } from '../style-components/game-theme/game-theme.component';
+import { Score } from '../../models/score';
+import { GameThemes } from '../../models/game-themes';
+import { GameThemeComponent } from '../base-style/game-theme/game-theme.component';
 
 @Component({
   selector: 'app-snake-game',

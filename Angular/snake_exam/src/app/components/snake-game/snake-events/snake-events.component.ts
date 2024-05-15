@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { SnakeEvent } from '../../models/snake-event';
-import { TimerFormatterPipe } from '../../pipes/timer-formatter.pipe';
+import { SnakeEvent } from '../../../models/snake-event';
+import { TimerFormatterPipe } from '../../../pipes/timer-formatter.pipe';
 import { FormsModule } from '@angular/forms';
 
 @Component({

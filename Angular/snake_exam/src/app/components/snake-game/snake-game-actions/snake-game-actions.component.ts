@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { GameAction } from '../../models/game-action';
+import { GameAction } from '../../../models/game-action';
 import { CommonModule } from '@angular/common';
-import { TimerFormatterPipe } from '../../pipes/timer-formatter.pipe';
+import { TimerFormatterPipe } from '../../../pipes/timer-formatter.pipe';
 
 @Component({
   selector: 'app-snake-game-actions',

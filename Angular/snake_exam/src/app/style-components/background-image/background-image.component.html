@@ -1,9 +1,0 @@
-<p class="form-label my-text fs-5">Background Image</p>
-
-@for (option of backgroundImageOptions; track option) {
-
-<label class="form-label" [for]="option.value">{{option.title}}</label>
-<input [(ngModel)]="currentBackgroundImage" type="radio" name="background"
-    [id]="option.value" [value]="option.value"
-    (change)="updateCurrentThemeChange()">
-}

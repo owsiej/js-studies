@@ -1,7 +1,7 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { SnakeIntroPageComponent } from './snake-intro-page/snake-intro-page.component';
-import { SnakeGameComponent } from './snake-game/snake-game.component';
+import { SnakeIntroPageComponent } from './components/snake-intro-page/snake-intro-page.component';
+import { SnakeGameComponent } from './components/snake-game/snake-game.component';
 import { provideHttpClient } from '@angular/common/http';
 import { SubmitGuard } from './guards/submit.guard';
 

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Score } from '../../models/score';
+import { Score } from '../../../models/score';
 import { CommonModule } from '@angular/common';
-import { SortPipe } from '../../pipes/sort.pipe';
+import { SortPipe } from '../../../pipes/sort.pipe';
 
 @Component({
   selector: 'app-game-highscores',

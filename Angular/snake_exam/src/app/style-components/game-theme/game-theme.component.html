@@ -1,9 +1,0 @@
-<p class="form-label my-text fs-5">Game themes</p>
-
-@for (option of gameThemeOptions; track option) {
-
-<label class="form-label" [for]="option.value">{{option.title}}</label>
-<input [(ngModel)]="currentGameTheme" type="radio" name="style"
-    [id]="option.value" [value]="option.value"
-    (change)="updateCurrentThemeChange()">
-}

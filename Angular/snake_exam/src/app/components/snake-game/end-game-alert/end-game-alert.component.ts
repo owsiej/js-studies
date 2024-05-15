@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Score } from '../../models/score';
+import { Score } from '../../../models/score';
 import { Observable } from 'rxjs';
 
 @Component({

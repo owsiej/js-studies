@@ -4,8 +4,8 @@
         <app-snake-form (submitEvent)="onSubmitAction($event)"
             [testPlayer]="testPlayer"></app-snake-form>
         <app-background-image
-            [(currentBackgroundImage)]="currentBackgroundImage"
-            (currentBackgroundImageChange)="handleBackgroundImageChange()"></app-background-image>
+            [(currentTheme)]="currentBackgroundImage"
+            (currentThemeChange)="handleBackgroundImageChange()"></app-background-image>
     </div>
     <div class="container w-25">
         <app-game-highscores
