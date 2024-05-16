@@ -1,9 +1,11 @@
-const { hasAllRequiredProperties } = require("../services/validators.js");
-
+const {
+  hasAllRequiredProperties,
+} = require("../../services/validators-engine.js");
+const validatorPostPutConfig = require("../../config/post-put-validator-config.js");
 const advertisementPropertiesValidator = (req, res, next) => {
   const body = req.body;
   try {
-    hasAllRequiredProperties(body);
+    hasAllRequiredProperties(body, validatorPostPutConfig);
 
     next();
   } catch (error) {

@@ -4,10 +4,11 @@ const multer = require("multer");
 const upload = multer();
 const router = express.Router();
 const Advertisement = require("../models/advertisement.js");
-const advertisementDataValidator = require("../middlewares/advertisement-data-validator.js");
-const advertisementPropertiesValidator = require("../middlewares/advertisement-properties-validator.js");
-const idValidator = require("../middlewares/id-validator.js");
-const headerValidator = require("../middlewares/request-headers.js");
+const postPutDataValidator = require("../middlewares/advertisements/post-put-data-validator.js");
+const requiredPropertiesValidator = require("../middlewares/advertisements/required-properties-validator.js");
+const filterDataValidator = require("../middlewares/advertisements/filter-data-validator.js");
+const idValidator = require("../middlewares/advertisements/id-validator.js");
+const headerValidator = require("../middlewares/advertisements/request-headers.js");
 const { databaseConnect, databaseDisconnect } = require("../services/db.js");
 const ObjectId = require("mongodb").ObjectId;
 const {
@@ -17,15 +18,20 @@ const {
 
 router.use(upload.none());
 
-router.get("/", async (req, res) => {
-  if (req.params) {
-    // tutaj stworzymy filter ogloszen w zaleznosci od podanych kryteriow
-  }
+router.get("/", filterDataValidator, async (req, res) => {
   try {
     const db = await databaseConnect();
     const collection = db.collection(process.env.MONGO_COLLECTION_NAME);
-
-    const adOutput = await collection.find({}).toArray();
+    let adOutput;
+    if (res.locals.filterQuery) {
+      const { filterQuery } = res.locals;
+      adOutput = await collection
+        .find({ $and: filterQuery })
+        .sort({ validTill: -1 })
+        .toArray();
+    } else {
+      adOutput = await collection.find({}).sort({ validTill: -1 }).toArray();
+    }
 
     res.send(adOutput);
     res.status(200);
@@ -76,8 +82,8 @@ router.get("/:adId", idValidator, async (req, res) => {
 router.post(
   "/add",
   headerValidator,
-  advertisementPropertiesValidator,
-  advertisementDataValidator,
+  requiredPropertiesValidator,
+  postPutDataValidator,
   async (req, res) => {
     const {
       title,
@@ -118,32 +124,52 @@ router.put(
   "/:adId",
   headerValidator,
   idValidator,
-  advertisementDataValidator,
+  postPutDataValidator,
   async (req, res) => {
     const adId = req.params.adId;
     const body = req.body;
-    console.log(req.headers);
-    res.send("udalo sie");
-    // try {
-    //   const db = await databaseConnect();
-    //   const collection = db.collection(process.env.MONGO_COLLECTION_NAME);
-    //   const ad = await collection.findOne({
-    //     _id: new ObjectId(adId),
-    //   });
-    //   if (ad) {
-    //     res.status(200);
-    //     res.send(ad);
-    //   } else {
-    //     res.status(400);
-    //     res.send("Ad of given id does not exists.");
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    //   res.status(500);
-    //   res.send(error.message);
-    // } finally {
-    //   await databaseDisconnect();
-    // }
+    body.lastModified = "$$NOW";
+    const updatePipeline = [
+      {
+        $set: body,
+      },
+    ];
+    if (body.paidPeriodInWeeks) {
+      updatePipeline.push({
+        $set: {
+          validTill: {
+            $dateAdd: {
+              startDate: "$creationTime",
+              unit: "week",
+              amount: body.paidPeriodInWeeks,
+            },
+          },
+        },
+      });
+    }
+    try {
+      const db = await databaseConnect();
+      const collection = db.collection(process.env.MONGO_COLLECTION_NAME);
+      const ad = await collection.updateOne(
+        {
+          _id: new ObjectId(adId),
+        },
+        updatePipeline
+      );
+      if (ad.matchedCount === 0) {
+        res.status(400);
+        res.send("Ad of given id does not exists.");
+      } else {
+        res.status(200);
+        res.send(ad);
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500);
+      res.send(error.message);
+    } finally {
+      await databaseDisconnect();
+    }
   }
 );
 
@@ -175,7 +201,4 @@ router.delete("/:adId", idValidator, async (req, res) => {
 
 module.exports = router;
 
-// - dokonczyc updatowanie ad iterujac przez obiekt z properties i dodajac pare key,value do obiektu ktory bedzie opisywac update
-// - wyszukiwanie po roznych kryteriach
-// - middleware 404 z obrazkiem
 // - endpoint user z autoryzacja tokenem jwt, przypisanie ad uzytkownikom

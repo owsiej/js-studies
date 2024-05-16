@@ -58,9 +58,9 @@ Lista funkcji:
 
 <!-- 6. [1 punkt] Aplikacja umożliwia usuwanie wybranego ogłoszenia. -->
 
-7. [1 punkt] Aplikacja umożliwia modyfikowanie wybranego ogłoszenia.
+<!-- 7. [1 punkt] Aplikacja umożliwia modyfikowanie wybranego ogłoszenia. -->
 
-8. [1 punkt za każde kryterium wyszukiwania/maksymalnie 5 punktów] Aplikacja pozwala na wyszukiwanie ogłoszeń według różnych kryteriów (tytuł, opis, zakres dat, zakres cen itp).
+<!-- 8. [1 punkt za każde kryterium wyszukiwania/maksymalnie 5 punktów] Aplikacja pozwala na wyszukiwanie ogłoszeń według różnych kryteriów (tytuł, opis, zakres dat, zakres cen itp). -->
 
 <!-- 9. [4-8 punktów] Aplikacja zapisuje ogłoszenia w bazie danych [max 8 punktów] lub plikach [max 4 punkty]. -->
 
@@ -70,6 +70,6 @@ Lista funkcji:
 
 12. [3 punkty] Po uruchomieniu z parametrem `debug` (np `node app.js debug`) aplikacja zapisuje w pliku tekstowym czas odebrania każdego żądania, metodę HTTP oraz adres na który przyszło żądanie.
 
-13. [2 punkty] Po odebraniu żądania wysłanego na adres który nie istnieje, aplikacja powinna zwracać statyczny obrazek zamiast domyślnej strony błędu 404.
+<!-- 13. [2 punkty] Po odebraniu żądania wysłanego na adres który nie istnieje, aplikacja powinna zwracać statyczny obrazek zamiast domyślnej strony błędu 404. -->
 
 14. [2 punkty] W przypadku wystąpienia błędów aplikacji, szczegóły błędu wyświetlane są za pomocą console.log a klient dostaje stosowny komunikat i kod odpowiedzi HTTP.

@@ -1,4 +1,4 @@
-const idValidator = (req, res, next) => {
+const headerValidator = (req, res, next) => {
   const headers = req.headers;
   if (!headers["content-type"].toLowerCase().includes("multipart/form-data")) {
     res.status(400);
@@ -10,4 +10,4 @@ const idValidator = (req, res, next) => {
   }
 };
 
-module.exports = idValidator;
+module.exports = headerValidator;
