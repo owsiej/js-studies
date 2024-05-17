@@ -8,7 +8,8 @@ class Advertisement {
     category,
     tags,
     price,
-    paidPeriodInWeeks
+    paidPeriodInWeeks,
+    userId
   ) {
     this.title = title;
     this.description = description;
@@ -20,6 +21,7 @@ class Advertisement {
     this.creationTime = moment().toDate();
     this.lastModified = this.creationTime;
     this.validTill = moment().add(this.paidPeriodInWeeks, "weeks").toDate();
+    this.userId = userId;
   }
 }
 

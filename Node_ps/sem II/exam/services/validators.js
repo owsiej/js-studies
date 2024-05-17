@@ -48,7 +48,7 @@ function isPresent(paramName, val) {
 }
 function areSpecialSymbols(paramName, val) {
   const specialSymbolsPattern =
-    /^[A-Za-ząężźłćńśó]*[\w\s-]*[A-Za-ząężźłćńśó]+$/;
+    /^[A-Za-ząężźłćńśóĄĘŻŹŁĆŃŚÓ]*[\w\s-]*[A-Za-ząężźłćńśóĄĘŻŹŁĆŃŚÓ]+$/;
 
   if (val.search(specialSymbolsPattern) === -1) {
     throw new Error(
@@ -75,9 +75,17 @@ function dateValidator(paramName, date) {
   return moment(date).toDate();
 }
 
+function patternValidator(paramName, val, mainConfig) {
+  if (val.search(mainConfig.pattern) === -1) {
+    throw new Error(`Value of ${paramName} ${mainConfig.errorMessage}`);
+  }
+  return val;
+}
+
 module.exports = {
   textValidator,
   numberValidator,
   tagsValidator,
   dateValidator,
+  patternValidator,
 };

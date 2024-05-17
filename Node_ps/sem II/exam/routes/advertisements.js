@@ -9,6 +9,7 @@ const requiredPropertiesValidator = require("../middlewares/advertisements/requi
 const filterDataValidator = require("../middlewares/advertisements/filter-data-validator.js");
 const idValidator = require("../middlewares/advertisements/id-validator.js");
 const headerValidator = require("../middlewares/advertisements/request-headers.js");
+const authenticateToken = require("../middlewares/authenticate-jwt-token.js");
 const { databaseConnect, databaseDisconnect } = require("../services/db.js");
 const ObjectId = require("mongodb").ObjectId;
 const {
@@ -16,21 +17,28 @@ const {
   htmlRepresentation,
 } = require("../models/object-representations.js");
 
+const collectionName = process.env.MONGO_AD_COLLECTION;
+
 router.use(upload.none());
 
-router.get("/", filterDataValidator, async (req, res) => {
+router.get("/", authenticateToken, filterDataValidator, async (req, res) => {
+  const userId = new ObjectId(`${req.userId}`);
+  console.log(userId);
   try {
     const db = await databaseConnect();
-    const collection = db.collection(process.env.MONGO_COLLECTION_NAME);
+    const collection = db.collection(collectionName);
     let adOutput;
     if (res.locals.filterQuery) {
       const { filterQuery } = res.locals;
       adOutput = await collection
-        .find({ $and: filterQuery })
+        .find({ $and: [{ userId: userId }, ...filterQuery] })
         .sort({ validTill: -1 })
         .toArray();
     } else {
-      adOutput = await collection.find({}).sort({ validTill: -1 }).toArray();
+      adOutput = await collection
+        .find({ userId: userId })
+        .sort({ validTill: -1 })
+        .toArray();
     }
 
     res.send(adOutput);
@@ -44,14 +52,16 @@ router.get("/", filterDataValidator, async (req, res) => {
   }
 });
 
-router.get("/:adId", idValidator, async (req, res) => {
+router.get("/:adId", authenticateToken, idValidator, async (req, res) => {
+  const userId = new ObjectId(`${req.userId}`);
   const adId = req.params.adId;
 
   try {
     const db = await databaseConnect();
-    const collection = db.collection(process.env.MONGO_COLLECTION_NAME);
+    const collection = db.collection(collectionName);
     const ad = await collection.findOne({
       _id: new ObjectId(adId),
+      userId: userId,
     });
     if (ad) {
       res.status(200);
@@ -67,7 +77,7 @@ router.get("/:adId", idValidator, async (req, res) => {
         },
       });
     } else {
-      res.status(400);
+      res.status(404);
       res.send("Ad of given id does not exists.");
     }
   } catch (error) {
@@ -81,10 +91,13 @@ router.get("/:adId", idValidator, async (req, res) => {
 
 router.post(
   "/add",
+  authenticateToken,
   headerValidator,
   requiredPropertiesValidator,
   postPutDataValidator,
   async (req, res) => {
+    const userId = new ObjectId(`${req.userId}`);
+
     const {
       title,
       description,
@@ -101,12 +114,13 @@ router.post(
       category,
       tags,
       price,
-      paidPeriodInWeeks
+      paidPeriodInWeeks,
+      userId
     );
     try {
       const db = await databaseConnect();
 
-      const collection = db.collection(process.env.MONGO_COLLECTION_NAME);
+      const collection = db.collection(collectionName);
       const insertedAd = await collection.insertOne(newAd);
 
       res.status(201);
@@ -122,10 +136,12 @@ router.post(
 );
 router.put(
   "/:adId",
+  authenticateToken,
   headerValidator,
   idValidator,
   postPutDataValidator,
   async (req, res) => {
+    const userId = new ObjectId(`${req.userId}`);
     const adId = req.params.adId;
     const body = req.body;
     body.lastModified = "$$NOW";
@@ -149,15 +165,16 @@ router.put(
     }
     try {
       const db = await databaseConnect();
-      const collection = db.collection(process.env.MONGO_COLLECTION_NAME);
+      const collection = db.collection(collectionName);
       const ad = await collection.updateOne(
         {
           _id: new ObjectId(adId),
+          userId: userId,
         },
         updatePipeline
       );
       if (ad.matchedCount === 0) {
-        res.status(400);
+        res.status(404);
         res.send("Ad of given id does not exists.");
       } else {
         res.status(200);
@@ -173,18 +190,20 @@ router.put(
   }
 );
 
-router.delete("/:adId", idValidator, async (req, res) => {
+router.delete("/:adId", authenticateToken, idValidator, async (req, res) => {
+  const userId = new ObjectId(`${req.userId}`);
   const adId = req.params.adId;
 
   try {
     const db = await databaseConnect();
-    const collection = db.collection(process.env.MONGO_COLLECTION_NAME);
+    const collection = db.collection(collectionName);
 
     const deleteResult = await collection.deleteOne({
       _id: new ObjectId(adId),
+      userId: userId,
     });
     if (deleteResult.deletedCount === 0) {
-      res.status(400);
+      res.status(404);
       res.send("Ad with requested id does not exits.");
     } else {
       res.status(200);
@@ -200,5 +219,3 @@ router.delete("/:adId", idValidator, async (req, res) => {
 });
 
 module.exports = router;
-
-// - endpoint user z autoryzacja tokenem jwt, przypisanie ad uzytkownikom
