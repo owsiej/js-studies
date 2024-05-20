@@ -318,7 +318,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0MmI4NzdmMDdiN2FmMmExYWRlMiIsImlhdCI6MTcxNjIwNTYyNiwiZXhwIjoxNzE2MjA5MjI2fQ.bGbx9NUuDrY0t8QDujgGqIT0ywqJFnxcL4CUkthZ1ug",
+								"value": "{{token}}",
 								"type": "default"
 							}
 						],
@@ -458,7 +458,7 @@
 					"response": []
 				},
 				{
-					"name": "Update advertisement",
+					"name": "Update advertisement by id",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {}
 					},

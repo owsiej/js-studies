@@ -22,3 +22,7 @@ JWT_SECRET_KEY=
 ## Run
 
 Run `npm start` to start server. To log all requests in file use `npm start debug`.
+
+## Others
+
+Postman `.json` file with sample requests included.
