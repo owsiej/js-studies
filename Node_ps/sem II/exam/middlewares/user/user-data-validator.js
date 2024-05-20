@@ -1,7 +1,7 @@
 const {
   validateObjectPropertyValues,
-} = require("../../services/validators-engine.js");
-const validatorUserConfig = require("../../config/user-validator-config.js");
+} = require("../../utils/validators-engine.js");
+const validatorUserConfig = require("../../validators/user-validator-config.js");
 
 const userDataValidator = (req, res, next) => {
   const body = req.body;

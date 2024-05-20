@@ -2,7 +2,7 @@ const {
   textValidator,
   numberValidator,
   tagsValidator,
-} = require("../services/validators.js");
+} = require("./validators.js");
 
 const validatorPostPutConfig = {
   title: {

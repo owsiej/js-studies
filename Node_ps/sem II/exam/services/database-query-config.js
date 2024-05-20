@@ -1,4 +1,4 @@
-function mapFilter(key, val) {
+function mapDatabaseFilter(key, val) {
   const filterMapper = {
     title: {
       title: {
@@ -50,4 +50,4 @@ function mapFilter(key, val) {
   return filterMapper[key];
 }
 
-module.exports = mapFilter;
+module.exports = mapDatabaseFilter;

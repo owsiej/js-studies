@@ -1,4 +1,4 @@
-const verifyToken = require("../services/verify-jwt-token.js");
+const verifyToken = require("../utils/verify-jwt-token.js");
 
 const authenticateToken = async (req, res, next) => {
   const token = req.headers["authorization"];
@@ -13,7 +13,7 @@ const authenticateToken = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     res.status(401);
-    res.send("Invalid token.");
+    res.send(error.message);
   }
 };
 module.exports = authenticateToken;

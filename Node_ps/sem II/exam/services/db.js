@@ -7,7 +7,6 @@ const client = new MongoClient(process.env.MONGO_CONNECTION_STRING, {
 async function databaseConnect() {
   await client.connect();
   await client.db("admin").command({ ping: 1 });
-  console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
   const db = client.db(process.env.MONGO_DATABASE_NAME);
   return db;
@@ -15,7 +14,6 @@ async function databaseConnect() {
 
 async function databaseDisconnect() {
   await client.close();
-  console.log("You successfully disconnected to MongoDB!");
 }
 
 module.exports = {

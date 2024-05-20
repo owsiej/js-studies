@@ -1,0 +1,562 @@
+{
+	"info": {
+		"_postman_id": "7c3522d2-cf15-4215-a579-2c11d8fe8007",
+		"name": "advert_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "datetime",
+			"item": [
+				{
+					"name": "Get current datetime",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}/heartbeat",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"heartbeat"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "Login user1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "login",
+											"value": "Owsiej",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "Zenek123!",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURL}}:{{port}}/user/login",
+									"host": [
+										"{{baseURL}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login user2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "login",
+											"value": "Owsiej2",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "dlugieHaslo!1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURL}}:{{port}}/user/login",
+									"host": [
+										"{{baseURL}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login user3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "login",
+											"value": "Owsiej3",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "długieHasło!1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURL}}:{{port}}/user/login",
+									"host": [
+										"{{baseURL}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "login",
+									"value": "Owsiej3",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "długieHasło!1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}/user/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "advertisements",
+			"item": [
+				{
+					"name": "Get all advertisements",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0M2UzODY0YTZhODU0MDYwNmQ4NCIsImlhdCI6MTcxNjIwMDE2MywiZXhwIjoxNzE2MjAzNzYzfQ.SjgLsVDFhJofcdPXNyE0sG8nBIMBxSXZt6SahXhdy7g",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}/advertisement",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"advertisement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all advertisements with query",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0M2UzODY0YTZhODU0MDYwNmQ4NCIsImlhdCI6MTcxNjE5OTQ4MSwiZXhwIjoxNzE2MjAzMDgxfQ.ozgmGqy_CiJ6JIHAwkS9rqNDGTfLIll6c8G5fvzPVl8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}/advertisement?priceGte=400",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"advertisement"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "samochod",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "volvo",
+									"disabled": true
+								},
+								{
+									"key": "author",
+									"value": "wojtek",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "motoryzacja",
+									"disabled": true
+								},
+								{
+									"key": "tags",
+									"value": "samochód",
+									"disabled": true
+								},
+								{
+									"key": "priceGte",
+									"value": "400"
+								},
+								{
+									"key": "priceLte",
+									"value": "400",
+									"disabled": true
+								},
+								{
+									"key": "createdAfter",
+									"value": "2024-05-16",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get advertisement by id json",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0MDYwN2VlNzQ4NTk3OGViMWE1ZSIsImlhdCI6MTcxNjE5OTExOSwiZXhwIjoxNzE2MjAyNzE5fQ.QDnuIZ-aYIYmYtfuHoptHkv8SOI3oMJgXtP-lsspJqw",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}/advertisement/664741e718b6faf4bb2f6579",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"advertisement",
+								"664741e718b6faf4bb2f6579"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get advertisement by id text",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0MDYwN2VlNzQ4NTk3OGViMWE1ZSIsImlhdCI6MTcxNjE5OTExOSwiZXhwIjoxNzE2MjAyNzE5fQ.QDnuIZ-aYIYmYtfuHoptHkv8SOI3oMJgXtP-lsspJqw",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}/advertisement/664741e718b6faf4bb2f6579",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"advertisement",
+								"664741e718b6faf4bb2f6579"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get advertisement by id html",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/html",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0MDYwN2VlNzQ4NTk3OGViMWE1ZSIsImlhdCI6MTcxNjE5OTExOSwiZXhwIjoxNzE2MjAyNzE5fQ.QDnuIZ-aYIYmYtfuHoptHkv8SOI3oMJgXtP-lsspJqw",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}/advertisement/664741e718b6faf4bb2f6579",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"advertisement",
+								"664741e718b6faf4bb2f6579"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}/dasdasd",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dasdasd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new advertisement",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0MDYwN2VlNzQ4NTk3OGViMWE1ZSIsImlhdCI6MTcxNjE5MzE2MiwiZXhwIjoxNzE2MTk2NzYyfQ.j9CmHmXy-8RFoEUbOSntFUOtjT20xzFMBPZFQzBlNsU",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Sprzedam ubrania",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "używane ubrania damskie rozmiar s",
+									"type": "text"
+								},
+								{
+									"key": "author",
+									"value": "Magda",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "odzież",
+									"type": "text"
+								},
+								{
+									"key": "tags",
+									"value": "moda,ubiór,koszulki,spodnie",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "2300",
+									"type": "text"
+								},
+								{
+									"key": "paidPeriodInWeeks",
+									"value": "4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}/advertisement/add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"advertisement",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update advertisement",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0M2UzODY0YTZhODU0MDYwNmQ4NCIsImlhdCI6MTcxNjE5OTQ4MSwiZXhwIjoxNzE2MjAzMDgxfQ.ozgmGqy_CiJ6JIHAwkS9rqNDGTfLIll6c8G5fvzPVl8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "sprzedam samocho",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "Seat 1.9 TDI",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "author",
+									"value": "Asia",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "lalal",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "tags",
+									"value": "malarstwo,obraz",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "500",
+									"type": "text"
+								},
+								{
+									"key": "paidPeriodInWeeks",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}/advertisement/6647478a7882f19369cafd68",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"advertisement",
+								"6647478a7882f19369cafd68"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete advertisement by id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0M2UzODY0YTZhODU0MDYwNmQ4NCIsImlhdCI6MTcxNjIwMDE2MywiZXhwIjoxNzE2MjAzNzYzfQ.SjgLsVDFhJofcdPXNyE0sG8nBIMBxSXZt6SahXhdy7g",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}/advertisement/6647478a7882f19369cafd68",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"advertisement",
+								"6647478a7882f19369cafd68"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

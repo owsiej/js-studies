@@ -1,4 +1,4 @@
-const { patternValidator } = require("../services/validators.js");
+const { patternValidator } = require("./validators.js");
 
 const validatorUserConfig = {
   login: {

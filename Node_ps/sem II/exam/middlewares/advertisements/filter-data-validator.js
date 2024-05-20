@@ -1,8 +1,8 @@
 const {
   validateObjectPropertyValues,
-} = require("../../services/validators-engine.js");
-const validatorFilterConfig = require("../../config/filter-validator-config.js");
-const mapFilter = require("../../config/database-query-config.js");
+} = require("../../utils/validators-engine.js");
+const validatorFilterConfig = require("../../validators/filter-validator-config.js");
+const mapDatabaseFilter = require("../../services/database-query-config.js");
 
 const filterDataValidator = (req, res, next) => {
   if (Object.keys(req.query).length === 0) {
@@ -15,7 +15,7 @@ const filterDataValidator = (req, res, next) => {
       );
       const filterQuery = Object.entries(validatedQuery).reduce(
         (acc, [key, value]) => {
-          acc.push(mapFilter(key, value));
+          acc.push(mapDatabaseFilter(key, value));
           return acc;
         },
         []

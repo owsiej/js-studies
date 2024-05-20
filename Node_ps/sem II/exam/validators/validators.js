@@ -1,5 +1,20 @@
 const moment = require("moment");
 
+function hasAllRequiredProperties(obj, mainConfig) {
+  const requiredProperties = Object.keys(mainConfig).sort();
+  const givenProperties = Object.keys(obj).sort();
+  if (requiredProperties.length !== givenProperties.length) {
+    throw new Error(
+      `Invalid amount of given properties. Only supported properties: ${requiredProperties}`
+    );
+  }
+  if (requiredProperties.toString() !== givenProperties.toString()) {
+    throw new Error(
+      `You need to supply all required properties, like: ${requiredProperties}`
+    );
+  }
+}
+
 function textValidator(paramName, val, config) {
   isPresent(paramName, val);
   if (!config.areSpecialAllowed) {
@@ -48,7 +63,7 @@ function isPresent(paramName, val) {
 }
 function areSpecialSymbols(paramName, val) {
   const specialSymbolsPattern =
-    /^[A-Za-ząężźłćńśóĄĘŻŹŁĆŃŚÓ]*[\w\s-]*[A-Za-ząężźłćńśóĄĘŻŹŁĆŃŚÓ]+$/;
+    /^[A-Za-ząężźłćńśóĄĘŻŹŁĆŃŚÓ]*[\w\s-ąężźłćńśóĄĘŻŹŁĆŃŚÓ]*[A-Za-ząężźłćńśóĄĘŻŹŁĆŃŚÓ]+$/;
 
   if (val.search(specialSymbolsPattern) === -1) {
     throw new Error(
@@ -88,4 +103,5 @@ module.exports = {
   tagsValidator,
   dateValidator,
   patternValidator,
+  hasAllRequiredProperties,
 };

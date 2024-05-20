@@ -3,7 +3,7 @@ const {
   numberValidator,
   tagsValidator,
   dateValidator,
-} = require("../services/validators.js");
+} = require("./validators.js");
 
 const validatorFilterConfig = {
   title: {
