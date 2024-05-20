@@ -49,7 +49,7 @@
 										},
 										{
 											"key": "password",
-											"value": "Zenek123!",
+											"value": "dlugieHaslo!11",
 											"type": "default"
 										}
 									]
@@ -83,7 +83,7 @@
 										},
 										{
 											"key": "password",
-											"value": "dlugieHaslo!1",
+											"value": "dlugieHaslo!22",
 											"type": "default"
 										}
 									]
@@ -184,7 +184,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0M2UzODY0YTZhODU0MDYwNmQ4NCIsImlhdCI6MTcxNjIwMDE2MywiZXhwIjoxNzE2MjAzNzYzfQ.SjgLsVDFhJofcdPXNyE0sG8nBIMBxSXZt6SahXhdy7g",
+								"value": "{{token}}",
 								"type": "default"
 							}
 						],
@@ -208,12 +208,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0M2UzODY0YTZhODU0MDYwNmQ4NCIsImlhdCI6MTcxNjE5OTQ4MSwiZXhwIjoxNzE2MjAzMDgxfQ.ozgmGqy_CiJ6JIHAwkS9rqNDGTfLIll6c8G5fvzPVl8",
+								"value": "{{token}}",
 								"type": "default"
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}:{{port}}/advertisement?priceGte=400",
+							"raw": "{{baseURL}}:{{port}}/advertisement?category=motoryzacja",
 							"host": [
 								"{{baseURL}}"
 							],
@@ -239,8 +239,7 @@
 								},
 								{
 									"key": "category",
-									"value": "motoryzacja",
-									"disabled": true
+									"value": "motoryzacja"
 								},
 								{
 									"key": "tags",
@@ -249,7 +248,8 @@
 								},
 								{
 									"key": "priceGte",
-									"value": "400"
+									"value": "400",
+									"disabled": true
 								},
 								{
 									"key": "priceLte",
@@ -283,19 +283,19 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0MDYwN2VlNzQ4NTk3OGViMWE1ZSIsImlhdCI6MTcxNjE5OTExOSwiZXhwIjoxNzE2MjAyNzE5fQ.QDnuIZ-aYIYmYtfuHoptHkv8SOI3oMJgXtP-lsspJqw",
+								"value": "{{token}}",
 								"type": "default"
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}:{{port}}/advertisement/664741e718b6faf4bb2f6579",
+							"raw": "{{baseURL}}:{{port}}/advertisement/664744bd864a6a8540606d85",
 							"host": [
 								"{{baseURL}}"
 							],
 							"port": "{{port}}",
 							"path": [
 								"advertisement",
-								"664741e718b6faf4bb2f6579"
+								"664744bd864a6a8540606d85"
 							]
 						}
 					},
@@ -318,19 +318,19 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0MDYwN2VlNzQ4NTk3OGViMWE1ZSIsImlhdCI6MTcxNjE5OTExOSwiZXhwIjoxNzE2MjAyNzE5fQ.QDnuIZ-aYIYmYtfuHoptHkv8SOI3oMJgXtP-lsspJqw",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0MmI4NzdmMDdiN2FmMmExYWRlMiIsImlhdCI6MTcxNjIwNTYyNiwiZXhwIjoxNzE2MjA5MjI2fQ.bGbx9NUuDrY0t8QDujgGqIT0ywqJFnxcL4CUkthZ1ug",
 								"type": "default"
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}:{{port}}/advertisement/664741e718b6faf4bb2f6579",
+							"raw": "{{baseURL}}:{{port}}/advertisement/664744bd864a6a8540606d85",
 							"host": [
 								"{{baseURL}}"
 							],
 							"port": "{{port}}",
 							"path": [
 								"advertisement",
-								"664741e718b6faf4bb2f6579"
+								"664744bd864a6a8540606d85"
 							]
 						}
 					},
@@ -353,19 +353,19 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0MDYwN2VlNzQ4NTk3OGViMWE1ZSIsImlhdCI6MTcxNjE5OTExOSwiZXhwIjoxNzE2MjAyNzE5fQ.QDnuIZ-aYIYmYtfuHoptHkv8SOI3oMJgXtP-lsspJqw",
+								"value": "{{token}}",
 								"type": "default"
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}:{{port}}/advertisement/664741e718b6faf4bb2f6579",
+							"raw": "{{baseURL}}:{{port}}/advertisement/664744bd864a6a8540606d85",
 							"host": [
 								"{{baseURL}}"
 							],
 							"port": "{{port}}",
 							"path": [
 								"advertisement",
-								"664741e718b6faf4bb2f6579"
+								"664744bd864a6a8540606d85"
 							]
 						}
 					},
@@ -399,7 +399,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0MDYwN2VlNzQ4NTk3OGViMWE1ZSIsImlhdCI6MTcxNjE5MzE2MiwiZXhwIjoxNzE2MTk2NzYyfQ.j9CmHmXy-8RFoEUbOSntFUOtjT20xzFMBPZFQzBlNsU",
+								"value": "{{token}}",
 								"type": "default"
 							}
 						],
@@ -408,37 +408,37 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "Sprzedam ubrania",
+									"value": "spr maszynę rolniczą",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "używane ubrania damskie rozmiar s",
+									"value": "John Deere diesel",
 									"type": "text"
 								},
 								{
 									"key": "author",
-									"value": "Magda",
+									"value": "Mateusz",
 									"type": "text"
 								},
 								{
 									"key": "category",
-									"value": "odzież",
+									"value": "motoryzacja",
 									"type": "text"
 								},
 								{
 									"key": "tags",
-									"value": "moda,ubiór,koszulki,spodnie",
+									"value": "rolnictwo,ciągnik",
 									"type": "text"
 								},
 								{
 									"key": "price",
-									"value": "2300",
+									"value": "400000",
 									"type": "text"
 								},
 								{
 									"key": "paidPeriodInWeeks",
-									"value": "4",
+									"value": "3",
 									"type": "text"
 								}
 							]
@@ -467,7 +467,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0M2UzODY0YTZhODU0MDYwNmQ4NCIsImlhdCI6MTcxNjE5OTQ4MSwiZXhwIjoxNzE2MjAzMDgxfQ.ozgmGqy_CiJ6JIHAwkS9rqNDGTfLIll6c8G5fvzPVl8",
+								"value": "{{token}}",
 								"type": "default"
 							}
 						],
@@ -506,7 +506,7 @@
 								},
 								{
 									"key": "price",
-									"value": "500",
+									"value": "999999",
 									"type": "text"
 								},
 								{
@@ -518,14 +518,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{baseURL}}:{{port}}/advertisement/6647478a7882f19369cafd68",
+							"raw": "{{baseURL}}:{{port}}/advertisement/664b3a32ac185f69f39643a0",
 							"host": [
 								"{{baseURL}}"
 							],
 							"port": "{{port}}",
 							"path": [
 								"advertisement",
-								"6647478a7882f19369cafd68"
+								"664b3a32ac185f69f39643a0"
 							]
 						}
 					},
@@ -538,19 +538,19 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDc0M2UzODY0YTZhODU0MDYwNmQ4NCIsImlhdCI6MTcxNjIwMDE2MywiZXhwIjoxNzE2MjAzNzYzfQ.SjgLsVDFhJofcdPXNyE0sG8nBIMBxSXZt6SahXhdy7g",
+								"value": "{{token}}",
 								"type": "default"
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}:{{port}}/advertisement/6647478a7882f19369cafd68",
+							"raw": "{{baseURL}}:{{port}}/advertisement/664b3a32ac185f69f39643a0",
 							"host": [
 								"{{baseURL}}"
 							],
 							"port": "{{port}}",
 							"path": [
 								"advertisement",
-								"6647478a7882f19369cafd68"
+								"664b3a32ac185f69f39643a0"
 							]
 						}
 					},
